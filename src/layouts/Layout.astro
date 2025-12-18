@@ -1,6 +1,6 @@
 ---
 import '../styles/globals.css'
-import { FloatingNav } from '../components/FloatingNav'
+import { Header } from '../components/Header'
 import Footer from '../components/Footer.astro'
 
 interface Props {
@@ -8,20 +8,7 @@ interface Props {
 }
 
 const { title } = Astro.props
-const navItems = [
-  {
-    name: 'Proyects',
-    link: '#proyects',
-  },
-  {
-    name: 'About',
-    link: '#about',
-  },
-  {
-    name: 'Contact',
-    link: '#contact',
-  },
-]
+
 ---
 
 <html lang='en'>
@@ -34,9 +21,8 @@ const navItems = [
     <title>{title}</title>
   </head>
   <body class='bg-base-100'>
-    <!-- <Navbar /> -->
     <div class="z-50 relative grid min-h-dvh grid-rows-[auto_1fr_auto]">
-      <FloatingNav navItems={navItems} client:load />
+      <Header client:load />
       <main>
         <slot />
       </main>
