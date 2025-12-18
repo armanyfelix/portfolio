@@ -96,9 +96,7 @@ export const FloatingNav = ({
           background,
         )}
       >
-        <h1 className="text-primary">
-          <slot />
-        </h1>
+        <h1 className="text-primary">Armany Felix</h1>
         {navItems.map((navItem: any, idx: number) => (
           <a
             key={`link=${idx}`}
