@@ -1,23 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin 'daisyui';
+@plugin "@tailwindcss/typography";
 
-@layer components {
-  .btn-nav {
-    @apply btn btn-sm text-lg rounded-xl bg-opacity-0 border-opacity-0 hover:bg-opacity-30 hover:border-opacity-10 hover:shadow-xl active:bg-opacity-70 text-secondary;
-  }
+.btn-nav {
+  @apply btn btn-sm text-lg rounded-xl opacity-0 hover:shadow-xl text-secondary;
 }
 
-//:root {
-//  --my-color: #fff;
-//  /* or any other variables/style */
-//}
-//[data-theme='dark'] {
-//  --my-color: #000;
-//}
-//[data-theme='pink'] {
- // --my-color: #ffabc8;
-//}
+/* :root {
+  --my-color: #fff;
+  /* or any other variables/style 
+}
+[data-theme='dark'] {
+  --my-color: #000;
+}
+[data-theme='pink'] {
+  --my-color: #ffabc8;
+} */
+@theme {
+  --font-mohave: var(--font-mohave);
+  --primary: '#f34213';
+  --secondary: '#525FE1';
+  --accent: '#fce4de';
+  --neutral: '#e0fbfc';
+  --base-100: '#000000';
+  --info: '#81a4cd';
+  --success: '#5c8001';
+  --warning: '#ffbe0b';
+  --error: '#af1b3f';
+  --rounded-box: '2rem';
+  --rounded-btn: '4.5rem';
+  --rounded-badge: '1.9rem';
+  --animation-btn: '0.25s';
+  --animation-input: '0.2s';
+  --btn-text-case: 'uppercase';
+  --btn-focus-scale: '0.95';
+  --border-btn: '1px';
+  --tab-border: '1px';
+  --tab-radius: '0.5rem';
+}
 
 
 * {
@@ -27,10 +47,10 @@
   margin: 0;
 }
 
-html,
+/* html,
 body {
   max-width: 100vw;
-}
+} */
 
 a {
   color: inherit;

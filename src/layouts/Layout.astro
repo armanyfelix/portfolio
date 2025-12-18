@@ -1,7 +1,7 @@
 ---
+import '../styles/globals.css'
 import { FloatingNav } from '../components/FloatingNav'
 import Footer from '../components/Footer.astro'
-import Background from '../components/Background.astro'
 
 interface Props {
   title: string
@@ -24,7 +24,6 @@ const navItems = [
 ]
 ---
 
-<!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
@@ -36,13 +35,15 @@ const navItems = [
   </head>
   <body class='bg-base-100'>
     <!-- <Navbar /> -->
-    <div class="z-50 relative">
-    <FloatingNav navItems={navItems} client:load />
-    <slot />
-    <Footer />
-  </div>
-    <div class="z-0">
-      <Background />
+    <div class="z-50 relative grid min-h-dvh grid-rows-[auto_1fr_auto]">
+      <FloatingNav navItems={navItems} client:load />
+      <main>
+        <slot />
+      </main>
+      <Footer />
     </div>
+    <!-- <div class="z-0">
+    <Background />
+    </div> -->
   </body>
 </html>
