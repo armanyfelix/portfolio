@@ -8,13 +8,7 @@ import {
 } from "framer-motion";
 import { cn } from "../utils/cn";
 
-export const TracingBeam = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -46,11 +40,8 @@ export const TracingBeam = ({
   );
 
   return (
-    <motion.div
-      ref={ref}
-      className={cn("relative w-full mt-52  ml-72 mr-3 h-full", className)}
-    >
-      <div className="absolute -left-4 md:-left-40 top-3">
+    <motion.div ref={ref} className="relative w-full">
+      <div className="absolute left-4 md:left-40 top-40">
         <motion.div
           transition={{
             duration: 0.2,
@@ -62,7 +53,7 @@ export const TracingBeam = ({
                 ? "none"
                 : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
-          className="ml-[27px] h-4 w-4 rounded-full border border-netural-200 shadow-sm flex items-center justify-center"
+          className="ml-6.5 h-4 w-4 rounded-full border border-netural-200 shadow-sm flex items-center justify-center"
         >
           <motion.div
             transition={{
@@ -82,7 +73,7 @@ export const TracingBeam = ({
           viewBox={`0 0 20 ${svgHeight}`}
           width="20"
           height={svgHeight} // Set the SVG height
-          className=" ml-4 block"
+          className="ml-4 block"
           aria-hidden="true"
         >
           <motion.path

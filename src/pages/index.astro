@@ -9,11 +9,10 @@ import HeroParallax from '../components/HeroParallax'
 ---
 
 <Layout title='Armany Web Portfolio'>
-  <div class='pt-5'>
-    <TracingBeam className='px-5 pt-56' client:load>
-      <div class='max-w-2xl mx-auto antialiased pt-4'>
+    <TracingBeam client:load>
+      <div class='max-w- mx-auto antialiased'>
        <!-- <Hero /> -->
-        <!-- <HeroParallax client:load /> -->
+        <HeroParallax client:load />d
         {dummyContent.map((item: any, index: number) => (
           <div class="mb-10">
             <h2 class="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
@@ -40,5 +39,4 @@ import HeroParallax from '../components/HeroParallax'
         ))}
       </div>
     </TracingBeam>
-  </div>
 </Layout>
