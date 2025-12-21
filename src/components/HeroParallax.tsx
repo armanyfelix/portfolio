@@ -6,12 +6,12 @@ import {
   useTransform,
   useSpring,
   MotionValue,
-} from "framer-motion";
+} from "motion/react";
 
 export default function HeroParallax() {
-  const firstRow = products.slice(0, 5);
-  const secondRow = products.slice(5, 10);
-  const thirdRow = products.slice(10, 15);
+  const firstRow = products.slice(0, 3);
+  const secondRow = products.slice(3, 6);
+  // const thirdRow = products.slice(10, 15);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -49,7 +49,7 @@ export default function HeroParallax() {
       ref={ref}
       className="h-[300dvh] overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d"
     >
-      <Header />
+      <Text />
       <motion.div
         style={{
           rotateX,
@@ -77,7 +77,7 @@ export default function HeroParallax() {
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
+        {/* <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
           {thirdRow.map((product) => (
             <ProductCard
               product={product}
@@ -85,19 +85,19 @@ export default function HeroParallax() {
               key={product.title}
             />
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </div>
   );
 }
 
-export const Header = () => {
+export const Text = () => {
   return (
-    <div className="max-w-7xl relative mx-auto py-20md:py-40px-4 w-full left-0 top-0">
+    <div className="max-w-7xl relatie text-center mx-aut py-20 md:py-40 px-4 w-full ">
       <h1 className="text-2xl md:text-7xl font-bold text-primary">
         The Ultimate <br /> development studio
       </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8">
+      <p className="max-w-4xl text-center mx-auto text-base md:text-xl mt-8">
         We build beautiful products with the latest technologies and frameworks.
         We are a team of passionate developers and designers that love to build
         amazing products.
@@ -126,14 +126,14 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-96 w-[30rem] relative flex-shrink-0"
+      className="group/product h-96 w-120 relative shrink-0"
     >
       <a href={product.link} className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
           height="600"
           width="600"
-          className="object-cover object-left-top absolute h-full w-full inset-0"
+          className="object-cover object-top-left absolute h-full w-full inset-0"
           alt={product.title}
         />
       </a>

@@ -29,6 +29,7 @@
     "daisyui": "^5.5.14",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.23.26",
+    "motion": "^12.23.26",
     "nodemailer": "^7.0.11",
     "p5": "^2.1.2",
     "pocketbase": "^0.26.5",

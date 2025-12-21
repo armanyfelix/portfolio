@@ -6,37 +6,14 @@ import { dummyContent } from '../data/dummyContent'
 import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
 import HeroParallax from '../components/HeroParallax'
+import Experience from '@/components/Experience.astro'
 ---
 
 <Layout title='Armany Web Portfolio'>
     <TracingBeam client:load>
-      <div class='max-w- mx-auto antialiased'>
-       <!-- <Hero /> -->
-        <HeroParallax client:load />d
-        {dummyContent.map((item: any, index: number) => (
-          <div class="mb-10">
-            <h2 class="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-              {item.badge}
-            </h2>
-
-            <p class={twMerge("text-xl mb-4")}>
-              {item.title}
-            </p>
-
-            <div class="text-sm  prose prose-sm dark:prose-invert">
-              {item?.image && (
-                <Image
-                  src={item.image}
-                  alt="blog thumbnail"
-                  height="1000"
-                  width="1000"
-                  class="rounded-lg mb-10 object-cover"
-                />
-              )}
-              {item.description}
-            </div>
-          </div>
-        ))}
+      <div class='max-w-full overflow-hidden mx-auto antialiased'>
+        <!-- <HeroParallax client:load /> -->
       </div>
+      <Experience />
     </TracingBeam>
 </Layout>

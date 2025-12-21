@@ -126,7 +126,7 @@ export const Header = ({ className }: { className?: string }) => {
                   </svg>
                 </label>
               </div>
-              <div className="mx-2 flex-1 px-2">Home</div>
+              <div className="mx-2 flex-1 px-2">Armany</div>
               <div className="hidden flex-none lg:block">
                 <ul className="menu menu-horizontal">
                   {/* Navbar menu content here */}
