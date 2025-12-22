@@ -4,7 +4,7 @@ import {
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
-} from "framer-motion";
+} from "motion/react";
 import { cn } from "../utils/cn";
 import themes from "../data/themes.json";
 import type { Theme } from "../types/themes";
@@ -100,106 +100,123 @@ export const Header = ({ className }: { className?: string }) => {
           background,
         )}
       >
-        <div className="drawer">
-          <input id="nav-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col">
-            {/* Navbar */}
-            <div className="navbar">
-              <div className="flex-1 lg:hidden">
+        <div className="navbar">
+          <div className="navbar-start">
+            <div className="drawer">
+              <input
+                id="menu-drawer"
+                type="checkbox"
+                className="drawer-toggle"
+              />
+              <div className="drawer-content">
                 <label
-                  htmlFor="nav-drawer"
-                  aria-label="open sidebar"
-                  className="btn btn-square btn-ghost"
+                  htmlFor="menu-drawer"
+                  className="btn btn-square btn-ghost drawer-button swap swap-rotate"
                 >
+                  <input type="checkbox" />
+                  {/* hamburger icon */}
                   <svg
+                    className="swap-off fill-current"
                     xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
                     fill="none"
                     viewBox="0 0 24 24"
-                    className="inline-block h-6 w-6 stroke-current"
+                    stroke="currentColor"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
-                    ></path>
+                      d="M4 6h16M4 12h16M4 18h7"
+                    />
+                  </svg>
+                  {/* close icon */}
+                  <svg
+                    className="swap-on fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 512 512"
+                  >
+                    <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
                   </svg>
                 </label>
               </div>
-              <div className="mx-2 flex-1 px-2">Armany</div>
-              <div className="hidden flex-none lg:block">
-                <ul className="menu menu-horizontal">
-                  {/* Navbar menu content here */}
-                  {links.map((l: Link, i: number) => (
-                    <li key={i}>
-                      <a href={l.href}>{l.name}</a>
-                    </li>
-                  ))}
+              <div className="drawer-side">
+                <label
+                  htmlFor="menu-drawer"
+                  aria-label="close sidebar"
+                  className="drawer-overlay"
+                ></label>
+                <ul className="menu bg-base-200 min-h-full w-80 p-4">
                   <li>
-                    <div className="dropdown dropdown-end">
-                      <div
-                        tabIndex={0}
-                        role="button"
-                        className="btnbtn-ghostbtn-sm"
-                      >
-                        {themes.find((t) => t.name === currentTheme)?.emoji ||
-                          "🎨"}
-                      </div>
-                      <ul
-                        tabIndex={-1}
-                        className={`dropdown-content rounded-box menu menu-vertical min-w-52 flex-nowrap max-h-[50dvh] overflow-auto gap-3 bg-accent-focus bg-opacity-30 p-3 shadow-lg backdrop-blur-md backdrop-brightness-75 md:max-h-[70vh] w-auto`}
-                      >
-                        {themes.map((t: any) => (
-                          <li
-                            key={t.name}
-                            data-theme={t.name}
-                            className="rounded-btn antialiased"
-                          >
-                            <button
-                              onClick={() => changeTheme(t.name)}
-                              className={`${currentTheme === t.name && "ring ring-accent "} flex items-center justify-between`}
-                            >
-                              <div>
-                                {t.emoji} {t.name}
-                              </div>
-                              <div className="inline-flex items-cente space-x-1">
-                                <div className="w-3 h-3 bg-primary rounded-full" />
-                                <div className="w-3 h-3 bg-secondary rounded-full" />
-                                <div className="w-3 h-3 bg-accent rounded-full" />
-                                <div className="w-3 h-3 bg-neutral rounded-full" />
-                              </div>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <a>Sidebar Item 1</a>
+                  </li>
+                  <li>
+                    <a>Sidebar Item 2</a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="drawer-side">
-            <label
-              htmlFor="nav-drawer"
-              aria-label="close sidebar"
-              className="drawer-overlay"
-            ></label>
-            <ul className="menu bg-base-200 min-h-full w-80 p-4">
-              {/* Sidebar content here */}
-              {links.map((l: Link, i: number) => (
-                <li key={i}>
-                  <a
-                    href={l.href}
-                    className={cn("relative items-center flex space-x-1")}
+          <div className="navbar-center">
+            <a className="btn btn-ghost text-xl">ARMANY</a>
+          </div>
+          <div className="navbar-end">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle"
+              >
+                {themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
+              </div>
+              <ul
+                tabIndex={-1}
+                className="menu dropdown-content bg-base-300 max-h-[70dvh] overflow-auto flex-nowrap gap-y-2 rounded-box z-1 mt-4 w-60 p-2 shadow-2xl"
+              >
+                {themes.map((t: any) => (
+                  <li
+                    key={t.name}
+                    data-theme={t.name}
+                    className="antialiased rounded-field"
                   >
-                    <span className="block sm:hidden">{l.icon}</span>
-                    <span className="hidden sm:block text-sm">{l.name}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+                    <label
+                      htmlFor={`theme-${t.name}`}
+                      onClick={() => changeTheme(t.name)}
+                      className={`${currentTheme === t.name && "ring ring-accent"} w-full flex items-center justify-between`}
+                    >
+                      <input
+                        type="radio"
+                        name="theme-dropdown"
+                        id={`theme-${t.name}`}
+                        className={`theme-controller sr-only`}
+                        aria-label={t.name}
+                        value={t.name}
+                      />
+                      <div className="text-nowrap">
+                        {t.emoji} {t.name}
+                      </div>
+                      <div className="inline-flex items-center flex-nowrap space-x-1">
+                        <div className="w-3 h-3 bg-primary rounded-full" />
+                        <div className="w-3 h-3 bg-secondary rounded-full" />
+                        <div className="w-3 h-3 bg-accent rounded-full" />
+                        <div className="w-3 h-3 bg-neutral rounded-full" />
+                      </div>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
+
+        {/* {links.map((l: Link, i: number) => (
+          <li key={i}>
+          <a href={l.href}>{l.name}</a>
+          </li>
+          ))} */}
       </motion.div>
     </AnimatePresence>
   );

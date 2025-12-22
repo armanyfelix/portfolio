@@ -5,8 +5,7 @@ import {
   useScroll,
   // useVelocity,
   useSpring,
-} from "framer-motion";
-import { cn } from "../utils/cn";
+} from "motion/react";
 
 export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);

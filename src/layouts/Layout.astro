@@ -20,8 +20,8 @@ const { title } = Astro.props
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class=''>
-    <div class="z-50 relative p-2 grid min-h-dvh grid-rows-[auto_1fr_auto]">
+  <body class="">
+    <div class="z-50 p-2 grid min-h-dvh grid-rows-[auto_1fr_auto]">
       <Header client:load />
       <main class="">
         <slot />
