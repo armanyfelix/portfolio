@@ -47,7 +47,7 @@ export default function HeroParallax() {
   return (
     <div
       ref={ref}
-      className="h-[300dvh] overflow-hidden antialiased relative flex flex-col self-auto perspective-[1000px] transform-3d"
+      className="h-[300dvh] antialiased relative flex flex-col self-auto perspective-midrange transform-3d"
     >
       <Text />
       <motion.div
@@ -93,14 +93,20 @@ export default function HeroParallax() {
 
 export const Text = () => {
   return (
-    <div className="max-w-7xl relatie text-center mx-aut py-20 md:py-40 px-4 w-full ">
-      <h1 className="text-2xl md:text-7xl font-bold text-primary">
-        The Ultimate <br /> development studio
-      </h1>
-      <p className="max-w-4xl text-center mx-auto text-base md:text-xl mt-8">
-        We build beautiful products with the latest technologies and frameworks.
-        We are a team of passionate developers and designers that love to build
-        amazing products.
+    <div className=" py-20 md:py-38 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
+      {/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
+        The Ultimate <br /> developer portfolio
+      </h1> */}
+      <p className="max-w-4xl text-base md:text-xl mt-8">
+        I'm a software developer who builds mostly with Typescript. I support
+        open source projects and the linux community. I love technologie and be
+        part od something bigger than me.
+        <br />
+        My goal for my platforms I'm not perfect, I've got lots of things to
+        learn and skills to develop, but I put myself out there anyway. My goal
+        is to show that achieving your goals is doable but takes dedication and
+        I hope to continue to inspire and motivate people with my content. I
+        build beautiful products with the latest technologies and frameworks.
       </p>
     </div>
   );

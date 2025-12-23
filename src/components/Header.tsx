@@ -44,7 +44,7 @@ export const Header = ({ className }: { className?: string }) => {
         setVisible(true);
         setBackground("bg-transparent shadow-none");
       } else {
-        setBackground("bg-base-300/60 backdrop-blur header-shadow");
+        setBackground("bg-base-300/60 backdrop-blur shadow-xl");
         if (direction < 0) {
           setVisible(true);
         } else {
@@ -95,7 +95,7 @@ export const Header = ({ className }: { className?: string }) => {
           duration: 0.2,
         }}
         className={cn(
-          "top-3 fixed w-full max-w-3xl px-3 justify-self-center place-self-center rounded-box z-5000 flex items-center",
+          "top-2 fixed w-full max-w-3xl px-3 justify-self-center place-self-center rounded-box z-50 flex items-center",
           className,
           background,
         )}
@@ -149,26 +149,27 @@ export const Header = ({ className }: { className?: string }) => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu bg-base-200 min-h-full w-80 p-4">
-                  <li>
-                    <a>Sidebar Item 1</a>
-                  </li>
-                  <li>
-                    <a>Sidebar Item 2</a>
-                  </li>
+                <ul className="menu lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl w-80 p-4">
+                  {links.map((l: Link, i: number) => (
+                    <li key={i}>
+                      <a href={l.href}>{l.name}</a>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
           </div>
           <div className="navbar-center">
-            <a className="btn btn-ghost text-xl">ARMANY</a>
+            <a href="/" className="btn btn-ghost font-serif font-bold text-2xl">
+              Armany
+            </a>
           </div>
           <div className="navbar-end">
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
                 role="button"
-                className="btn btn-ghost btn-circle"
+                className="btn btn-ghost btn-square"
               >
                 {themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
               </div>
@@ -185,7 +186,7 @@ export const Header = ({ className }: { className?: string }) => {
                     <label
                       htmlFor={`theme-${t.name}`}
                       onClick={() => changeTheme(t.name)}
-                      className={`${currentTheme === t.name && "ring ring-accent"} w-full flex items-center justify-between`}
+                      className={`${currentTheme === t.name && "ring-2 ring-base-content"} w-full flex items-center justify-between`}
                     >
                       <input
                         type="radio"
@@ -211,12 +212,6 @@ export const Header = ({ className }: { className?: string }) => {
             </div>
           </div>
         </div>
-
-        {/* {links.map((l: Link, i: number) => (
-          <li key={i}>
-          <a href={l.href}>{l.name}</a>
-          </li>
-          ))} */}
       </motion.div>
     </AnimatePresence>
   );

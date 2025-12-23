@@ -12,10 +12,10 @@ import Dotfiles from '@/components/Dotfiles.astro'
 
 <Layout title='Armany Web Portfolio'>
     <TracingBeam client:load>
-      <div class='max-w-full overflow-hidden mx-auto antialiased'>
-        <!-- <HeroParallax client:load /> -->
+      <HeroParallax client:load />
+      <div class="ml-18 mr-4 md:ml-48 md:mr-16">
+        <Experience />
+        <Dotfiles />
       </div>
-      <Experience />
-      <Dotfiles />
     </TracingBeam>
 </Layout>
