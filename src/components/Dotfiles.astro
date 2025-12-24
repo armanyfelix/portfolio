@@ -1,9 +1,52 @@
 ---
+import { Image } from "astro:assets"
+
+interface Resources {
+  name: string
+  preview: string
+  description: string
+  url: string
+}
+
+const resources: Resources[] = [
+  {
+    name: 'NixOS',
+    preview: '',
+    description: '',
+    url: '',
+  }
+]
 ---
 
 
-<section>
-  <h1>
-    Dotfiles
-  </h1>
+<section class="mt-36">
+  <h1 class="text-4xl font-bold mb-10">Dotfiles</h1>
+  <p>Get my configuration, this are all my setup that you can setup en your nix os machine just running the installation script. <a href="https://github.com/armanyfelix/dotfiles" class="link! link-primary!">Repo</a></p>
+  <div class="flex flex-wrap items-start justify-center gap-6">
+    {resources &&
+    resources.map((r) => (
+    <div class="card image-full w-96 bg-base-100 text-neutral shadow-xl">
+      <figure>
+        <!-- <Image
+        src={r.preview}
+        class="object-fit object-center"
+        width={384}
+        height={208}
+        alt=""
+        /> -->
+        image
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title text-2xl font-bold">{r.name}</h2>
+        <p class="font-mono tracking-tighter">{r.description}</p>
+        <div class="card-actions justify-end">
+          <a href={r.url} target="_blank" class="btn btn-primary px-3">
+            <!-- <ArrowTopRightOnSquareIcon class="h-5 w-5" /> -->
+            arrowicon
+          </a>
+        </div>
+      </div>
+    </div>
+    ))}
+  </div>
 </section>

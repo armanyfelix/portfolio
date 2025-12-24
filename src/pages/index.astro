@@ -1,13 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import Hero from '../components/Hero.astro'
 import { TracingBeam } from '../components/TracingBeam'
-import { dummyContent } from '../data/dummyContent'
-import { twMerge } from 'tailwind-merge'
-import { Image } from 'astro:assets'
 import HeroParallax from '../components/HeroParallax'
 import Experience from '@/components/Experience.astro'
 import Dotfiles from '@/components/Dotfiles.astro'
+import Contact from '@/components/Contact'
 ---
 
 <Layout title='Armany Web Portfolio'>
@@ -16,6 +13,7 @@ import Dotfiles from '@/components/Dotfiles.astro'
       <div class="ml-18 mr-4 md:ml-48 md:mr-16">
         <Experience />
         <Dotfiles />
+        <Contact client:load />
       </div>
     </TracingBeam>
 </Layout>

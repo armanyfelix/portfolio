@@ -94,7 +94,7 @@ export const Header = ({ className }: { className?: string }) => {
         transition={{
           duration: 0.2,
         }}
-        className={cn("fixed z-50 w-full", className, background)}
+        className={cn("fixed px-20 z-50 w-full")}
       >
         <div className="drawer">
           <input
@@ -104,9 +104,10 @@ export const Header = ({ className }: { className?: string }) => {
             onClick={() => setMenuOpen(!menuOpen)}
           />
           <div className="drawer-content">
+            {/* NAVBAR AND HEADER CONTENT */}
             <div
               className={cn(
-                "top-2 fixed navbar w-full max-w-3xl px-3 justify-self-center place-self-center rounded-box z-50 flex items-center",
+                "top-2 fixed navbar w-full max-w-[96dvw] md:max-w-3xl px-3 justify-self-center place-self-center rounded-box flex items-center",
                 className,
                 background,
               )}
@@ -201,13 +202,13 @@ export const Header = ({ className }: { className?: string }) => {
               </div>
             </div>
           </div>
-          <div className="drawer-side">
+          <div className="drawer-side Z-100">
             <label
               htmlFor="menu-drawer"
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl w-80 p-4">
+            <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
               {links.map((l: Link, i: number) => (
                 <li key={i}>
                   <a href={l.href}>{l.name}</a>
