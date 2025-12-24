@@ -11,7 +11,6 @@ import {
 export default function HeroParallax() {
   const firstRow = products.slice(0, 3);
   const secondRow = products.slice(3, 6);
-  // const thirdRow = products.slice(10, 15);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -77,15 +76,6 @@ export default function HeroParallax() {
             />
           ))}
         </motion.div>
-        {/* <motion.div className="flex flex-row-reverse space-x-reverse space-x-20">
-          {thirdRow.map((product) => (
-            <ProductCard
-              product={product}
-              translate={translateX}
-              key={product.title}
-            />
-          ))}
-        </motion.div> */}
       </motion.div>
     </div>
   );
@@ -93,20 +83,20 @@ export default function HeroParallax() {
 
 export const Text = () => {
   return (
-    <div className=" py-20 md:py-38 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
+    <div className="pt-20 md:pt-48 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
       {/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
         The Ultimate <br /> developer portfolio
       </h1> */}
-      <p className="max-w-4xl text-base md:text-xl mt-8">
-        I'm a software developer who builds mostly with Typescript. I support
-        open source projects and the linux community. I love technologie and be
-        part od something bigger than me.
+      <p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
+        I'm a developer who crafts primarily with TypeScript, with a passion for
+        Linux and open-source software.
         <br />
-        My goal for my platforms I'm not perfect, I've got lots of things to
-        learn and skills to develop, but I put myself out there anyway. My goal
-        is to show that achieving your goals is doable but takes dedication and
-        I hope to continue to inspire and motivate people with my content. I
-        build beautiful products with the latest technologies and frameworks.
+        <br />
+        With 4 years of experience, I specialize in cross-platform development
+        with web technologies, building from one codebase for all platforms.
+        <br />
+        <br />I believe in a web owned by its users, and I'm dedicated to making
+        it better. Forever learning, always building.
       </p>
     </div>
   );

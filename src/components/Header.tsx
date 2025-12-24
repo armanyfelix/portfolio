@@ -36,7 +36,7 @@ export const Header = ({ className }: { className?: string }) => {
   const [currentTheme, setCurrentTheme] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [background, setBackground] = useState<string>("");
-
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     if (typeof current === "number") {
       let direction = current! - scrollYProgress.getPrevious()!;
@@ -94,27 +94,28 @@ export const Header = ({ className }: { className?: string }) => {
         transition={{
           duration: 0.2,
         }}
-        className={cn(
-          "top-2 fixed w-full max-w-3xl px-3 justify-self-center place-self-center rounded-box z-50 flex items-center",
-          className,
-          background,
-        )}
+        className={cn("fixed z-50 w-full", className, background)}
       >
-        <div className="navbar">
-          <div className="navbar-start">
-            <div className="drawer">
-              <input
-                id="menu-drawer"
-                type="checkbox"
-                className="drawer-toggle"
-              />
-              <div className="drawer-content">
+        <div className="drawer">
+          <input
+            id="menu-drawer"
+            type="checkbox"
+            className="drawer-toggle"
+            onClick={() => setMenuOpen(!menuOpen)}
+          />
+          <div className="drawer-content">
+            <div
+              className={cn(
+                "top-2 fixed navbar w-full max-w-3xl px-3 justify-self-center place-self-center rounded-box z-50 flex items-center",
+                className,
+                background,
+              )}
+            >
+              <div className="navbar-start">
                 <label
                   htmlFor="menu-drawer"
-                  className="btn btn-square btn-ghost drawer-button swap swap-rotate"
+                  className={`${menuOpen && "swap-active"} btn btn-square btn-ghost drawer-button swap swap-rotate`}
                 >
-                  <input type="checkbox" />
-                  {/* hamburger icon */}
                   <svg
                     className="swap-off fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -143,73 +144,76 @@ export const Header = ({ className }: { className?: string }) => {
                   </svg>
                 </label>
               </div>
-              <div className="drawer-side">
-                <label
-                  htmlFor="menu-drawer"
-                  aria-label="close sidebar"
-                  className="drawer-overlay"
-                ></label>
-                <ul className="menu lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl w-80 p-4">
-                  {links.map((l: Link, i: number) => (
-                    <li key={i}>
-                      <a href={l.href}>{l.name}</a>
-                    </li>
-                  ))}
-                </ul>
+              <div className="navbar-center">
+                <a
+                  href="/"
+                  className="btn btn-ghost text-primary! font-mono font-bold text-3xl"
+                >
+                  Armany
+                </a>
               </div>
-            </div>
-          </div>
-          <div className="navbar-center">
-            <a href="/" className="btn btn-ghost font-serif font-bold text-2xl">
-              Armany
-            </a>
-          </div>
-          <div className="navbar-end">
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-square"
-              >
-                {themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
-              </div>
-              <ul
-                tabIndex={-1}
-                className="menu dropdown-content bg-base-300 max-h-[70dvh] overflow-auto flex-nowrap gap-y-2 rounded-box z-1 mt-4 w-60 p-2 shadow-2xl"
-              >
-                {themes.map((t: any) => (
-                  <li
-                    key={t.name}
-                    data-theme={t.name}
-                    className="antialiased rounded-field"
+              <div className="navbar-end">
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-square"
                   >
-                    <label
-                      htmlFor={`theme-${t.name}`}
-                      onClick={() => changeTheme(t.name)}
-                      className={`${currentTheme === t.name && "ring-2 ring-base-content"} w-full flex items-center justify-between`}
-                    >
-                      <input
-                        type="radio"
-                        name="theme-dropdown"
-                        id={`theme-${t.name}`}
-                        className={`theme-controller sr-only`}
-                        aria-label={t.name}
-                        value={t.name}
-                      />
-                      <div className="text-nowrap">
-                        {t.emoji} {t.name}
-                      </div>
-                      <div className="inline-flex items-center flex-nowrap space-x-1">
-                        <div className="w-3 h-3 bg-primary rounded-full" />
-                        <div className="w-3 h-3 bg-secondary rounded-full" />
-                        <div className="w-3 h-3 bg-accent rounded-full" />
-                        <div className="w-3 h-3 bg-neutral rounded-full" />
-                      </div>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+                    {themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
+                  </div>
+                  <ul
+                    tabIndex={-1}
+                    className="menu dropdown-content bg-base-300 max-h-[70dvh] overflow-auto flex-nowrap gap-y-2 rounded-box z-1 mt-4 w-60 p-2 shadow-2xl"
+                  >
+                    {themes.map((t: any) => (
+                      <li
+                        key={t.name}
+                        data-theme={t.name}
+                        className="antialiased rounded-field"
+                      >
+                        <label
+                          htmlFor={`theme-${t.name}`}
+                          onClick={() => changeTheme(t.name)}
+                          className={`${currentTheme === t.name && "ring-2 ring-base-content"} w-full flex items-center justify-between`}
+                        >
+                          <input
+                            type="radio"
+                            name="theme-dropdown"
+                            id={`theme-${t.name}`}
+                            className={`theme-controller sr-only`}
+                            aria-label={t.name}
+                            value={t.name}
+                          />
+                          <div className="text-nowrap">
+                            {t.emoji} {t.name}
+                          </div>
+                          <div className="inline-flex items-center flex-nowrap space-x-1">
+                            <div className="w-3 h-3 bg-primary rounded-full" />
+                            <div className="w-3 h-3 bg-secondary rounded-full" />
+                            <div className="w-3 h-3 bg-accent rounded-full" />
+                            <div className="w-3 h-3 bg-neutral rounded-full" />
+                          </div>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
+          <div className="drawer-side">
+            <label
+              htmlFor="menu-drawer"
+              aria-label="close sidebar"
+              className="drawer-overlay"
+            ></label>
+            <ul className="menu lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl w-80 p-4">
+              {links.map((l: Link, i: number) => (
+                <li key={i}>
+                  <a href={l.href}>{l.name}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </motion.div>
