@@ -17,14 +17,14 @@ export default function HeroParallax() {
     offset: ["start start", "end start"],
   });
 
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
+  const springConfig = { stiffness: 300, damping: 40, bounce: 30 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 1000]),
+    useTransform(scrollYProgress, [0.2, 1], [0, 1000]),
     springConfig,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -1000]),
+    useTransform(scrollYProgress, [0.2, 1], [0, -1000]),
     springConfig,
   );
   const rotateX = useSpring(
@@ -40,13 +40,13 @@ export default function HeroParallax() {
     springConfig,
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.2], [-1000, 100]),
     springConfig,
   );
   return (
-    <div
+    <section
       ref={ref}
-      className="h-[300dvh] antialiased relative flex flex-col self-auto perspective-midrange transform-3d"
+      className="h-[280dvh] antialiased relative flex flex-col self-auto perspective-midrange transform-3d"
     >
       <Text />
       <motion.div
@@ -77,7 +77,7 @@ export default function HeroParallax() {
           ))}
         </motion.div>
       </motion.div>
-    </div>
+    </section>
   );
 }
 
@@ -98,6 +98,8 @@ export const Text = () => {
         <br />I believe in a web owned by its users, and I'm dedicated to making
         it better. Forever learning, always building.
       </p>
+
+      <h1 className="mt-96 font-bold text-5xl font-mono">Proyects</h1>
     </div>
   );
 };
