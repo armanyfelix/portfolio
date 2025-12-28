@@ -47,7 +47,7 @@ const topClasses = ''
     <nav class={`${menuOpen ? 'block' : 'hidden'} mx-4 mt-4`}>
       <ul class='block md:flex md:items-center md:space-x-3'>
         {
-          navItems.map((item, index) => (
+          navItems.map((item) => (
             <li>
               <a href={item.href} class='btn btn-sm btn-ghost w-full text-lg md:w-auto'>
                 {item.label}

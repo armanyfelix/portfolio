@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { products } from "../data/products";
+import { products } from "../data/proyects";
 import {
   motion,
   useScroll,
@@ -27,6 +27,7 @@ export default function HeroParallax() {
     useTransform(scrollYProgress, [0.2, 1], [0, -1000]),
     springConfig,
   );
+  1;
   const rotateX = useSpring(
     useTransform(scrollYProgress, [0, 0.2], [15, 0]),
     springConfig,
@@ -58,7 +59,7 @@ export default function HeroParallax() {
         }}
         className=""
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+        <motion.div className="flex flex-row space-x-10 mb-20">
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -67,7 +68,7 @@ export default function HeroParallax() {
             />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row  mb-20 space-x-20 ">
+        <motion.div className="flex flex-row  mb-20 space-x-10 ">
           {secondRow.map((product) => (
             <ProductCard
               product={product}
@@ -85,7 +86,7 @@ export const Text = () => {
   return (
     <div className="pt-20 md:pt-48 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
       {/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
-        The Ultimate <br /> developer portfolio
+        Software developer
       </h1> */}
       <p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
         I'm a developer who crafts primarily with TypeScript, with a passion for
@@ -93,7 +94,7 @@ export const Text = () => {
         <br />
         <br />
         With 4 years of experience, I specialize in cross-platform development
-        with web technologies, building from one codebase for all platforms.
+        with web technologies, full responsive to deploy everywere.
         <br />
         <br />I believe in a web owned by its users, and I'm dedicated to making
         it better. Forever learning, always building.
@@ -124,14 +125,14 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-96 w-120 relative shrink-0"
+      className="group/product h-auto w-md relative shrink-0"
     >
       <a href={product.link} className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
-          height="600"
+          height="400"
           width="600"
-          className="object-cover object-top-left absolute h-full w-full inset-0"
+          className="object-contain absolute h-full w-full inset-0"
           alt={product.title}
         />
       </a>

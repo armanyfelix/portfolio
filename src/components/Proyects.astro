@@ -1,8 +1,5 @@
 ---
-// import Title from './common/Title.astro'
-import Github from '../svg/Github.astro'
 import { pbImagePath } from '../helpers/images'
-import { ArrowTopRightOnSquareIcon, CodeBracketSquareIcon } from '@heroicons/react/16/solid'
 
 const proyects: any = []
 ---
@@ -13,19 +10,19 @@ const proyects: any = []
   <div class=" mx-5 flex flex-wrap items-start justify-center gap-5 xl:mx-40">
     {proyects.length
     ? proyects.map((p: any, i: number) => (
-    <div class="card glass max-h-[500px] max-w-[400px]">
+    <div class="card glass max-h-125 max-w-100">
       <figure>
         <div class="carousel-center carousel w-auto items-start">
           {p.images?.map((img: string, j: number) => (
           <div
           id={`proyect-${i}.${j}`}
-          class={`group/item carousel-item relative mx-auto max-h-[210px] items-start justify-center ${
+          class={`group/item carousel-item relative mx-auto max-h-52.5 items-start justify-center ${
           p.type === 'mobile' ? 'w-1/4 border border-black' : 'w-auto'
           }`}
           >
             <img
             src={pbImagePath(p, img)}
-            class="object-fit max-h-[200px] object-center"
+            class="object-fit max-h-50 object-center"
             width={400}
             height={200}
             alt=""
@@ -54,7 +51,7 @@ const proyects: any = []
           ))}
         </div>
       </figure>
-      <div class="card-body max-h-[260px] min-h-[260px] pt-4">
+      <div class="card-body max-h-60 min-h-65 pt-4">
         <h2 class="card-title">{p.name}</h2>
         <p class="overflow-auto">{p.description}</p>
         <div class="card-actions justify-end">

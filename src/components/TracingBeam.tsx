@@ -50,7 +50,7 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
             boxShadow:
               scrollYProgress.get() > 0
                 ? "none"
-                : "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                : "rgba(0, 0, 0, 0.34) 0px 3px 8px",
           }}
           className="ml-6.5 h-4 w-4 loading loading-ring duration-1000 loading-sm"
         >
@@ -104,10 +104,14 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
               y1={y1} // set y1 for gradient
               y2={y2} // set y2 for gradient
             >
-              <stop stopColor="#18CCFC" stopOpacity="0"></stop>
-              <stop stopColor="#18CCFC"></stop>
-              <stop offset="0.325" stopColor="#6344F5"></stop>
-              <stop offset="1" stopColor="#AE48FF" stopOpacity="0"></stop>
+              <stop stopColor="var(--color-primary)" stopOpacity="0"></stop>
+              <stop stopColor="var(--color-primary)"></stop>
+              <stop offset="0.325" stopColor="var(--color-secondary)"></stop>
+              <stop
+                offset="1"
+                stopColor="var(--color-accent)"
+                stopOpacity="0"
+              ></stop>
             </motion.linearGradient>
           </defs>
         </svg>
