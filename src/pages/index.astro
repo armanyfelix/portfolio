@@ -5,6 +5,7 @@ import HeroParallax from '../components/HeroParallax'
 import Experience from '@/components/Experience.astro'
 import Dotfiles from '@/components/Dotfiles.astro'
 import Contact from '@/components/Contact'
+import WhatIUseBtw from '@/components/WhatIUseBtw.astro'
 ---
 
 <Layout title='Armany Web Portfolio'>
@@ -12,6 +13,7 @@ import Contact from '@/components/Contact'
       <HeroParallax client:load />
       <div class="ml-18 mr-4 md:ml-48 md:mr-16">
         <Experience />
+        <WhatIUseBtw />
         <Dotfiles />
         <Contact client:load />
       </div>

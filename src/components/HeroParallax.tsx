@@ -46,6 +46,7 @@ export default function HeroParallax() {
   );
   return (
     <section
+      id="about"
       ref={ref}
       className="h-[280dvh] antialiased relative flex flex-col self-auto perspective-midrange transform-3d"
     >

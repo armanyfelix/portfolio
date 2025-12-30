@@ -11,23 +11,56 @@ import type { Theme } from "../types/themes";
 
 interface Link {
   name: string;
-  href: string;
-  icon?: any | undefined;
+  href?: string;
+  submenu?: Link[];
 }
 
 const links: Link[] = [
+  {
+    name: "About",
+    href: "About",
+  },
   {
     name: "Proyects",
     href: "#proyects",
   },
   {
-    name: "About",
-    href: "#about",
+    name: "Experience",
+    href: "#experience",
+  },
+  {
+    name: "What I use btw",
+    submenu: [
+      {
+        name: "Linux",
+        href: "/linux",
+      },
+      {
+        name: "Terminal",
+        href: "/terminal",
+      },
+      {
+        name: "Web Dev",
+        href: "/webdev",
+      },
+      {
+        name: "servers",
+        href: "/servers",
+      },
+    ],
+  },
+  {
+    name: "Dotfiles",
+    href: "#dotfiles",
   },
   {
     name: "Contact",
     href: "#contact",
   },
+  // {
+  //   name: 'Blog',
+  //   href: 'blog.armany.dev',
+  // }
 ];
 
 export const Header = ({ className }: { className?: string }) => {
@@ -209,11 +242,26 @@ export const Header = ({ className }: { className?: string }) => {
               className="drawer-overlay"
             ></label>
             <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-              {links.map((l: Link, i: number) => (
-                <li key={i}>
-                  <a href={l.href}>{l.name}</a>
-                </li>
-              ))}
+              {links.map((l: Link, i: number) =>
+                l.href ? (
+                  <li key={i}>
+                    <a href={l.href}>{l.name}</a>
+                  </li>
+                ) : (
+                  <div tabIndex={0} className="collapse collapse-arrow">
+                    <div className="collapse-title font-semibold">{l.name}</div>
+                    <div className="collapse-content text-sm">
+                      <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
+                        {l.submenu.map((s: Link, j: number) => (
+                          <li key={j}>
+                            <a href={s.href}>{s.name}</a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ),
+              )}
             </ul>
           </div>
         </div>
