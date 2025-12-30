@@ -88,7 +88,7 @@ export const Text = () => {
     <div className="pt-20 md:pt-48 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
       {/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
         Software developer
-      </h1> */}
+        </h1> */}
       <p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
         I'm a developer who crafts primarily with TypeScript, with a passion for
         Linux and open-source software.
@@ -100,8 +100,6 @@ export const Text = () => {
         <br />I believe in a web owned by its users, and I'm dedicated to making
         it better. Forever learning, always building.
       </p>
-
-      <h1 className="mt-96 font-bold text-5xl font-mono">Proyects</h1>
     </div>
   );
 };
@@ -131,9 +129,9 @@ export const ProductCard = ({
       <a href={product.link} className="block group-hover/product:shadow-2xl ">
         <img
           src={product.thumbnail}
-          height="400"
+          height="600"
           width="600"
-          className="object-contain absolute h-full w-full inset-0"
+          className="object-cover object-left-top absolute h-full w-full inset-0"
           alt={product.title}
         />
       </a>

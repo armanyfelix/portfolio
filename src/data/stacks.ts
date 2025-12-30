@@ -36,7 +36,7 @@ const terminal: Stack[] = [
   },
 ];
 
-const web_dev: Stack[] = [
+const webdev: Stack[] = [
   {
     name: "DaisyUI",
     description:
@@ -55,4 +55,4 @@ const servers: Stack[] = [
   },
 ];
 
-export { linux, terminal, web_dev, servers };
+export { linux, terminal, webdev, servers };

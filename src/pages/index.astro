@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { TracingBeam } from '../components/TracingBeam'
 import HeroParallax from '../components/HeroParallax'
 import Experience from '@/components/Experience.astro'
 import Dotfiles from '@/components/Dotfiles.astro'
@@ -9,13 +8,11 @@ import WhatIUseBtw from '@/components/WhatIUseBtw.astro'
 ---
 
 <Layout title='Armany Web Portfolio'>
-    <TracingBeam client:load>
-      <HeroParallax client:load />
-      <div class="ml-18 mr-4 md:ml-48 md:mr-16">
-        <Experience />
-        <WhatIUseBtw />
-        <Dotfiles />
-        <Contact client:load />
-      </div>
-    </TracingBeam>
+  <HeroParallax client:load />
+  <div class="ml-18 mr-4 md:ml-48 md:mr-16">
+    <Experience />
+    <WhatIUseBtw />
+    <Dotfiles />
+    <Contact client:load />
+  </div>
 </Layout>

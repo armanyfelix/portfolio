@@ -7,65 +7,10 @@ import {
 } from "motion/react";
 import { cn } from "../utils/cn";
 import themes from "../data/themes.json";
-import type { Theme } from "../types/themes";
-
-interface Link {
-  name: string;
-  href?: string;
-  submenu?: Link[];
-}
-
-const links: Link[] = [
-  {
-    name: "About",
-    href: "About",
-  },
-  {
-    name: "Proyects",
-    href: "#proyects",
-  },
-  {
-    name: "Experience",
-    href: "#experience",
-  },
-  {
-    name: "What I use btw",
-    submenu: [
-      {
-        name: "Linux",
-        href: "/linux",
-      },
-      {
-        name: "Terminal",
-        href: "/terminal",
-      },
-      {
-        name: "Web Dev",
-        href: "/webdev",
-      },
-      {
-        name: "servers",
-        href: "/servers",
-      },
-    ],
-  },
-  {
-    name: "Dotfiles",
-    href: "#dotfiles",
-  },
-  {
-    name: "Contact",
-    href: "#contact",
-  },
-  // {
-  //   name: 'Blog',
-  //   href: 'blog.armany.dev',
-  // }
-];
+import { routes, type Route } from "@/data/routes";
 
 export const Header = ({ className }: { className?: string }) => {
   const { scrollYProgress } = useScroll();
-
   const [currentTheme, setCurrentTheme] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [background, setBackground] = useState<string>("");
@@ -242,7 +187,7 @@ export const Header = ({ className }: { className?: string }) => {
               className="drawer-overlay"
             ></label>
             <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-              {links.map((l: Link, i: number) =>
+              {routes.map((l: Route, i: number) =>
                 l.href ? (
                   <li key={i}>
                     <a href={l.href}>{l.name}</a>
@@ -252,7 +197,7 @@ export const Header = ({ className }: { className?: string }) => {
                     <div className="collapse-title font-semibold">{l.name}</div>
                     <div className="collapse-content text-sm">
                       <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-                        {l.submenu.map((s: Link, j: number) => (
+                        {l.submenu.map((s: Route, j: number) => (
                           <li key={j}>
                             <a href={s.href}>{s.name}</a>
                           </li>
