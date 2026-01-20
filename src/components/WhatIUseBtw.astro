@@ -1,7 +1,9 @@
 ---
+import ExcalidrawViewer from "./ExcalidrawViewer"
+// import WhatIUseBtwFile from "p/whatIUseBtw.excalidraw"
 ---
 
-<div id="what I use btw" class="mt-20 pt-16">  
+<section id="what I use btw" class="mt-20 pt-16">  
   <h1 class="text-5xl font-bold mb-10">What I use btw</h1>
   <ul class="flex items-center justify-evenly">
     {['linux', 'terminal', 'webdev', 'servers'].map((l) => (
@@ -10,6 +12,13 @@
     </li>
     ))}
   </ul>
+  <div class="text-center mt-32">
+    <!-- <ExcalidrawViewer
+      client:load 
+      filePath={WhatIUseBtwFile}
+    height="700px"
+    /> -->
+  </div>
   <!-- {resources &&
   resources.map((r) => (
   <div class="card image-full w-96 bg-base-100 text-neutral shadow-xl">
@@ -34,4 +43,4 @@
   </div>
   </div>
   ))} -->
-</div>
+</section>

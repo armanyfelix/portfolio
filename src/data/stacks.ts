@@ -29,7 +29,7 @@ const linux: Stack[] = [
 
 const terminal: Stack[] = [
   {
-    name: "",
+    name: "WezTerm",
     description: "",
     preview: "",
     url: "",
@@ -37,6 +37,30 @@ const terminal: Stack[] = [
 ];
 
 const webdev: Stack[] = [
+  {
+    name: "react",
+    description: "",
+    preview: "",
+    url: "",
+  },
+  {
+    name: "react",
+    description: "",
+    preview: "",
+    url: "",
+  },
+  {
+    name: "react",
+    description: "",
+    preview: "",
+    url: "",
+  },
+  {
+    name: "react",
+    description: "",
+    preview: "",
+    url: "",
+  },
   {
     name: "DaisyUI",
     description:
