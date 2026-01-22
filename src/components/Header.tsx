@@ -193,7 +193,7 @@ export const Header = ({ className }: { className?: string }) => {
                     <a href={l.href}>{l.name}</a>
                   </li>
                 ) : (
-                  <div tabIndex={0} className="collapse collapse-arrow">
+                  <div key={i} tabIndex={0} className="collapse collapse-arrow">
                     <div className="collapse-title font-semibold">{l.name}</div>
                     <div className="collapse-content text-sm">
                       <ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">

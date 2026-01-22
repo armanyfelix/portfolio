@@ -1,23 +1,21 @@
 ---
 import ExcalidrawViewer from "./ExcalidrawViewer"
-// import WhatIUseBtwFile from "p/whatIUseBtw.excalidraw"
+// import WhatIUseBtwFile from "p/btw.excalidraw"
 ---
 
-<section id="what I use btw" class="mt-20 pt-16">  
+<section id="what I use btw" class="mt-20pt-16">  
   <h1 class="text-5xl font-bold mb-10">What I use btw</h1>
-  <ul class="flex items-center justify-evenly">
-    {['linux', 'terminal', 'webdev', 'servers'].map((l) => (
-    <li>
-      <a href={`/${l}`} class="link link-accent text-4xl capitalize">{l}</a>
-    </li>
-    ))}
-  </ul>
-  <div class="text-center mt-32">
-    <!-- <ExcalidrawViewer
-      client:load 
-      filePath={WhatIUseBtwFile}
-    height="700px"
-    /> -->
+  <!-- <ul class="flex items-center justify-evenly">
+  {['linux', 'terminal', 'webdev', 'servers'].map((l) => (
+  <li>
+  <a href={`/${l}`} class="link link-accent text-4xl capitalize">{l}</a>
+  </li>
+  ))}
+  </ul> -->
+  <div class="text-cente h-[500px] mt-32">
+    <ExcalidrawViewer
+      client:only
+    />
   </div>
   <!-- {resources &&
   resources.map((r) => (

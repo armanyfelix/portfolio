@@ -15,8 +15,26 @@ export default defineConfig({
     plugins: [
       tailwind(),
     ],
-  },
-  adapter: node({
-    mode: "standalone",
-  }),
+    // resolve: {
+      // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+      // alias: {
+        // Mapear TODAS las importaciones problemáticas de roughjs
+        // 'roughjs/bin/rough': 'roughjs/bin/rough.js',
+        // 'roughjs/bin/fillers/hachure-filler': 'roughjs/bin/fillers/hachure-filler.js',
+        // 'roughjs/bin/fillers/zigzag-line-filler': 'roughjs/bin/fillers/zigzag-line-filler.js',
+        // 'roughjs/bin/fillers/hatch-filler': 'roughjs/bin/fillers/hatch-filler.js',
+        // 'roughjs/bin/fillers/dot-filler': 'roughjs/bin/fillers/dot-filler.js',
+        // 'roughjs/bin/fillers/dashed-filler': 'roughjs/bin/fillers/dashed-filler.js',
+        // 'roughjs/bin/fillers/zigzag-filler': 'roughjs/bin/fillers/zigzag-filler.js',
+        // Si hay más errores, puedes usar este patrón genérico
+    //     'roughjs/bin/': 'roughjs/bin/',
+    //   }
+    // },
+    // ssr: {
+    //   noExternal: ['roughjs', '@excalidraw/excalidraw']
+    // }
+},
+adapter: node({
+  mode: "standalone",
+}),
 })
