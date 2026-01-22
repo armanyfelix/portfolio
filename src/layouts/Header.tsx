@@ -9,7 +9,7 @@ import { cn } from "../utils/cn";
 import themes from "../data/themes.json";
 import { routes, type Route } from "@/data/routes";
 
-export const Header = ({ className }: { className?: string }) => {
+export default function Header({ className }: { className?: string }) {
   const { scrollYProgress } = useScroll();
   const [currentTheme, setCurrentTheme] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
@@ -213,4 +213,4 @@ export const Header = ({ className }: { className?: string }) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}

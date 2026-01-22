@@ -19,24 +19,7 @@ export const routes: Route[] = [
   },
   {
     name: "What I use btw",
-    submenu: [
-      {
-        name: "Linux",
-        href: "/linux",
-      },
-      {
-        name: "Terminal",
-        href: "/terminal",
-      },
-      {
-        name: "Web Dev",
-        href: "/webdev",
-      },
-      {
-        name: "servers",
-        href: "/servers",
-      },
-    ],
+    href: "#whatIUseBtw",
   },
   {
     name: "Dotfiles",

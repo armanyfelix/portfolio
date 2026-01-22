@@ -46,9 +46,9 @@ export default function HeroParallax() {
   );
   return (
     <section
-      id="about"
+      id="Proyects"
       ref={ref}
-      className="h-[280dvh] antialiased relative flex flex-col self-auto perspective-midrange transform-3d"
+      className="h-[280dvh]  antialiased flex flex-col self-auto perspective-midrange transform-3d"
     >
       <Text />
       <motion.div
