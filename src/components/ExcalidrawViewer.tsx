@@ -48,7 +48,7 @@ export default function ExcalidrawViewer({ filePath }: Props) {
   }
 
   return (
-    <div className="h-125">
+    <div className="h-200">
       <Suspense
         fallback={
           <div className="alert alert-soft">
@@ -60,7 +60,7 @@ export default function ExcalidrawViewer({ filePath }: Props) {
         <Excalidraw
           initialData={drawingData}
           viewModeEnabled={true}
-          zenModeEnabled={false}
+          // zenModeEnabled={false}
           // gridModeEnabled={false}
           theme="dark"
           name="What I use btw"

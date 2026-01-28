@@ -1,12 +1,11 @@
-import {
-  AtSymbolIcon,
-  CheckCircleIcon,
-  MapPinIcon,
-  PaperAirplaneIcon,
-  PhoneIcon,
-  XCircleIcon,
-} from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
+import CheckCircleIcon from "@/icons/CheckCircle.svg";
+import ErrorCircleIcon from "@/icons/ErrorCircle.svg";
+import PaperAirplaneIcon from "@/icons/PaperAirplane.svg";
+import GithubIcon from "@/icons/Github.svg";
+import LinkedinIcon from "@/icons/Linkedin.svg";
+import EmailIcon from "@/icons/Email.svg";
+import MapPinIcon from "@/icons/MapPin.svg";
 
 interface Props {
   sendEmail?: (data: FormData) => Promise<void>;
@@ -22,6 +21,26 @@ export default function Contact({}: Props) {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return res.test(String(email).toLowerCase());
   }
+
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await fetch("/api/sendmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      // if (response.ok) {
+      //   setSended("success");
+      // } else {
+      //   setSended("error");
+      // }
+    } catch (_error) {
+      // setSended("error");
+    }
+  };
 
   const handleSendEmail = async (e: FormData) => {
     try {
@@ -55,27 +74,21 @@ export default function Contact({}: Props) {
               </p>
             </div>
             <div className="mt-8 flex flex-col space-y-4 md:mt-0">
-              <div className="inline-flex space-x-2">
-                <PhoneIcon className="h-6 w-6" />
-                <span>+(52) 664 212 2325</span>
+              <div className="inline-flex items-center space-x-2">
+                <EmailIcon />
+                <span>armanyfelix@proton.me</span>
               </div>
               <div className="inline-flex items-center space-x-2">
-                <AtSymbolIcon className="h-6 w-6" />
-                <span>luis.armany.felix@gmail.com</span>
-              </div>
-              <div className="inline-flex items-center space-x-2">
-                <MapPinIcon className="h-6 w-6" />
+                <MapPinIcon />
                 <span>Tijuana B.C. Mexico</span>
               </div>
             </div>
             <div className="mt-6 flex space-x-4">
               <a href="https://www.linkedin.com/in/armany-felix">
-                {/* <Linkedin /> */}
-                linkedin
+                <LinkedinIcon />
               </a>
               <a href="https://github.com/armanyfelix/">
-                {/* <Github /> */}
-                git
+                <GithubIcon />
               </a>
             </div>
           </div>
@@ -133,7 +146,7 @@ export default function Contact({}: Props) {
                     {sending ? (
                       <span className="loading loading-dots loading-lg" />
                     ) : (
-                      <PaperAirplaneIcon className="h-6 w-6" />
+                      <PaperAirplaneIcon />
                     )}
                   </button>
                 </div>
@@ -147,7 +160,7 @@ export default function Contact({}: Props) {
           className="alert alert-error fixed left-3 right-3 top-2 z-50 w-full"
           onClick={() => setError(undefined)}
         >
-          <XCircleIcon className="h-9 w-9" />
+          <ErrorCircleIcon />
           <span>
             Error! The mail could not be sent, please try a again later. 😬
           </span>
@@ -158,7 +171,7 @@ export default function Contact({}: Props) {
             className="alert alert-success fixed right-1/2 top-24 z-50 w-auto translate-x-1/2"
             onClick={() => setError(undefined)}
           >
-            <CheckCircleIcon className="h-9 w-9" />
+            <CheckCircleIcon />
             <span>
               The mail was send successfully! I will answer you ASAP. ✌️😁
             </span>
