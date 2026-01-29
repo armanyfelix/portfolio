@@ -105,26 +105,35 @@ export default function Contact({}: Props) {
                   <input
                     type="text"
                     name="name"
-                    className="input"
+                    className="input validator"
+                    pattern="[A-Za-z][A-Za-z0-9\-]*"
+                    minLength={3}
+                    maxLength={30}
                     placeholder="Name"
                     required
                   />
+                  <p className="validator-hint">
+                    Must be 3 to 30 characters
+                    <br />
+                    containing only letters, numbers or dash
+                  </p>
 
                   <label className="label">Email</label>
                   <input
                     type="email"
                     name="email"
-                    className="input"
-                    placeholder="Email"
+                    className="input validator"
+                    placeholder="mail@site.com"
                     required
                   />
+                  <p className="validator-hint">Enter valid email address</p>
 
                   <label className="label">Message</label>
                   <textarea
                     name="message"
                     className="textarea"
                     placeholder="Message"
-                    rows={4}
+                    rows={3}
                     required
                   />
                 </fieldset>

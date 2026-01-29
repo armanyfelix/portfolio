@@ -85,7 +85,7 @@ export default function Header({ className }: { className?: string }) {
             {/* NAVBAR AND HEADER CONTENT */}
             <div
               className={cn(
-                "top-2 fixed navbar w-full right-1/2 translate-x-1/2 max-w-[96dvw] md:max-w-3xl px-3 justify-self-center place-self-center rounded-box flex items-center",
+                "top-5 fixed navbar w-full right-1/2 translate-x-1/2 max-w-[96dvw] md:max-w-3xl px-3 justify-self-center place-self-center rounded-box flex items-center",
                 className,
                 background,
               )}

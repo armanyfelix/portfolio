@@ -3,9 +3,12 @@ import nodemailer from "nodemailer";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const data = await request.json();
-    const { email, fullName } = data;
-    if (!email || !fullName) {
+    console.log("sending email");
+    const data = await request.formData();
+    const name = data.get("name");
+    const email = data.get("email");
+    const message = data.get("message");
+    if (!email || !name || !message) {
       return new Response(
         JSON.stringify({
           message: "Missing required fields",
@@ -28,13 +31,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     // Verificar conexión
-    // await transporter.verify()
+    // await transporter.verify();
 
-    const messageConfirmation = {
-      from: `"Vanguardia Mexicana" <${import.meta.env.EMAIL_SENDER}>`,
-      to: email,
-      subject: "Afiliación a Vanguardia Mexicana",
-      text: `Hola ${fullName}, gracias por tu interés en afiliarte.`,
+    await transporter.sendMail({
+      from: `"Armany's portfolio" <${import.meta.env.EMAIL_SENDER}>`,
+      to: `${email}`,
+      subject: "You contacted armany felix",
+      text: `Hello ${name}, thank you for contact me! I will answer ASAP`,
       html: `
       <!DOCTYPE html>
       <html lang="es">
@@ -50,15 +53,13 @@ export const POST: APIRoute = async ({ request }) => {
       </body>
       </html>
     `,
-    };
+    });
 
-    await transporter.sendMail(messageConfirmation);
-
-    const messageWithData = {
-      from: `"Vanguardia Mexicana" <${import.meta.env.EMAIL_SENDER}>`,
-      to: import.meta.env.EMAIL_RECEIVER,
-      subject: "Nueva Solicitud de Afiliación",
-      text: `${email}, a mandado su información.`,
+    await transporter.sendMail({
+      from: `"Mi portafolio" <${import.meta.env.EMAIL_SENDER}>`,
+      to: `${import.meta.env.EMAIL_RECEIVER}`,
+      subject: "Contact via portfolio",
+      text: `${email}, me a contactado por el portafolio, con suerte no es otro hacker chino.`,
       html: `
       <!DOCTYPE html>
       <html lang="es">
@@ -73,9 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
       </body>
       </html>
       `,
-    };
-
-    await transporter.sendMail(messageWithData);
+    });
 
     return new Response(
       JSON.stringify({
@@ -85,6 +84,7 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 200 },
     );
   } catch (error) {
+    console.log(error);
     return new Response(
       JSON.stringify({
         error: true,
