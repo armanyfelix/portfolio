@@ -34,9 +34,6 @@ if (Astro.request.method === "POST") {
     
     const response = await fetch(`${Astro.url.origin}/api/sendmail`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: data,
     })
     
