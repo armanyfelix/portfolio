@@ -32,7 +32,6 @@ if (Astro.request.method === "POST") {
     if (typeof message !== "string" || message.length < 6) {
       error = "Message must be at least 6 characters. ";
     }
-    console.log('stringify data', JSON.stringify(data));
     
     const response: any = await fetch(`${Astro.url.origin}/api/sendmail`, {
       method: "POST",
@@ -41,13 +40,6 @@ if (Astro.request.method === "POST") {
       },
       body: JSON.stringify(data),
     })
-
-    console.log('📦 Response recibida:', {
-          status: response.status,
-          statusText: response.statusText,
-          ok: response.ok,
-          headers: Object.fromEntries(response.headers.entries())
-        });
     
     if (response.ok) {
       sended = true
@@ -63,18 +55,6 @@ if (Astro.request.method === "POST") {
     }
   }
 }
-
-const onSubmit = async (data: any) => {
-  try {
-    // if (response.ok) {
-    //   setSended("success");
-    // } else {
-    //   setSended("error");
-    // }
-  } catch (_error) {
-    // setSended("error");
-  }
-};
 ---
 
 <section id="contact" class="antialiased lg:h-screen lg:py-1">
