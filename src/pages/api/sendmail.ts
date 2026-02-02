@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    console.log("sending email");
+    console.log("<<<<<<<<<<<<<<<<< sending email >>>>>>>>>>>>>>>>>>>>");
     const data = await request.formData();
     const name = data.get("name");
     const email = data.get("email");
