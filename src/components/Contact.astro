@@ -15,15 +15,13 @@ let loading: boolean = false;
 let sended: boolean = false;
 
 if (Astro.request.method === "POST") {
-  console.log('local type shit')
   try {
     loading = true;
-    const data = await Astro.request.formData();
-    const name = data.get("name");
-    const email = data.get("email");
-    const message = data.get("message");
-    
-    console.log('data', data);
+    const formData: FormData = await Astro.request.formData();
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+    const data = Object.fromEntries(formData.entries())
     
     if (typeof name !== "string" || name.length < 3) {
       error = "Please enter a name. ";
@@ -34,22 +32,25 @@ if (Astro.request.method === "POST") {
     if (typeof message !== "string" || message.length < 6) {
       error = "Message must be at least 6 characters. ";
     }
+    console.log('stringify data', JSON.stringify(data));
     
     const response: any = await fetch(`${Astro.url.origin}/api/sendmail`, {
       method: "POST",
-      body: data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
     })
 
     console.log('📦 Response recibida:', {
           status: response.status,
           statusText: response.statusText,
           ok: response.ok,
-          headers: Object.fromEntries(response.headers?.entries())
+          headers: Object.fromEntries(response.headers.entries())
         });
     
     if (response.ok) {
       sended = true
-      console.log('se mando? seguro?????')
     } else {
       const responseText = await response.text();
       console.log('📝 Response body:', responseText);

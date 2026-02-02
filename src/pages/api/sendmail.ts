@@ -3,11 +3,11 @@ import nodemailer from "nodemailer";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    console.log("<<<<<<<<<<<<<<<<< sending email >>>>>>>>>>>>>>>>>>>>");
-    const data = await request.formData();
-    const name = data.get("name");
-    const email = data.get("email");
-    const message = data.get("message");
+    const data = await request.json();
+    const email = data.email;
+    const name = data.name;
+    const message = data.message;
+
     if (!email || !name || !message) {
       return new Response(
         JSON.stringify({
