@@ -23,6 +23,8 @@ if (Astro.request.method === "POST") {
     const email = data.get("email");
     const message = data.get("message");
     
+    console.log('data', data);
+    
     if (typeof name !== "string" || name.length < 3) {
       error = "Please enter a name. ";
     }
@@ -42,7 +44,9 @@ if (Astro.request.method === "POST") {
     
     if (response.ok) {
       sended = true
+      console.log('se mando? seguro?????')
     } else {
+      console.log('error del servidor pero sin mas detallesm, gracias cloudflare')
       error = "server"
     }
   } catch (error) {
