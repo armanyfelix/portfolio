@@ -35,19 +35,25 @@ if (Astro.request.method === "POST") {
       error = "Message must be at least 6 characters. ";
     }
     
-    const response = await fetch(`${Astro.url.origin}/api/sendmail`, {
+    const response: any = await fetch(`${Astro.url.origin}/api/sendmail`, {
       method: "POST",
       body: data,
     })
-    
-    console.log(response)
+
+    console.log('📦 Response recibida:', {
+          status: response.status,
+          statusText: response.statusText,
+          ok: response.ok,
+          headers: Object.fromEntries(response.headers?.entries())
+        });
     
     if (response.ok) {
       sended = true
       console.log('se mando? seguro?????')
     } else {
-      console.log('error del servidor pero sin mas detallesm, gracias cloudflare')
-      error = "server"
+      const responseText = await response.text();
+      console.log('📝 Response body:', responseText);
+      error = "server";
     }
   } catch (error) {
     console.error(error)
