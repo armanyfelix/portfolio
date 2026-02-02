@@ -17,64 +17,55 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const smtpServer = "smtp-relay.brevo.com";
-    const smtpPort = 587;
-
-    let transporter = nodemailer.createTransport({
-      host: smtpServer,
-      port: smtpPort,
-      secure: false,
-      auth: {
-        user: import.meta.env.EMAIL,
-        pass: import.meta.env.EMAIL_PASSWORD,
+    const userEmailResponse = await fetch(
+      "https://api.brevo.com/v3/smtp/email",
+      {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "api-key": import.meta.env.BREVO_API_KEY,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          sender: {
+            name: "Armany's Portfolio",
+            email: import.meta.env.EMAIL_SENDER || "noreply@armanyfelix.dev",
+          },
+          to: [
+            {
+              email: email,
+              name: name,
+            },
+          ],
+          subject: "Thank you for contacting me!",
+          textContent: `Hello ${name},\n\nThank you for reaching out! I have received your message and will get back to you as soon as possible.\n\nBest regards,\nArmany Felix`,
+          htmlContent: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2>Hello ${name},</h2>
+            <p>Thank you for reaching out! I have received your message and will get back to you as soon as possible.</p>
+            <p>Best regards,<br><strong>Armany Felix</strong></p>
+            <hr style="margin: 30px 0;">
+            <p style="font-size: 12px; color: #666;">
+              This is an automated message from <a href="https://armanyfelix.dev">armanyfelix.dev</a>
+            </p>
+          </div>
+        `,
+        }),
       },
-    });
+    );
 
-    // Verificar conexión
-    // await transporter.verify();
+    const userResult = await userEmailResponse.json();
+    console.log(
+      "📧 Brevo User Response:",
+      userEmailResponse.status,
+      userResult,
+    );
 
-    await transporter.sendMail({
-      from: `"Armany's portfolio" <${import.meta.env.EMAIL_SENDER}>`,
-      to: `${email}`,
-      subject: "You contacted armany felix",
-      text: `Hello ${name}, thank you for contact me! I will answer ASAP`,
-      html: `
-      <!DOCTYPE html>
-      <html lang="es">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Confirmación de Afiliación - Vanguardia Mexicana</title>
-          <style>
-          </style>
-      </head>
-      <body>
+    if (!userEmailResponse.ok) {
+      throw new Error(`Brevo API Error: ${JSON.stringify(userResult)}`);
+    }
 
-      </body>
-      </html>
-    `,
-    });
-
-    await transporter.sendMail({
-      from: `"Mi portafolio" <${import.meta.env.EMAIL_SENDER}>`,
-      to: `${import.meta.env.EMAIL_RECEIVER}`,
-      subject: "Contact via portfolio",
-      text: `${email}, me a contactado por el portafolio, con suerte no es otro hacker chino.`,
-      html: `
-      <!DOCTYPE html>
-      <html lang="es">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Nueva Solicitud de Afiliación - Vanguardia Mexicana</title>
-          <style>
-          </style>
-      </head>
-      <body>
-      </body>
-      </html>
-      `,
-    });
+    console.log("📤 Enviando email de notificación...");
 
     return new Response(
       JSON.stringify({
