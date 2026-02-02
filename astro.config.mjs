@@ -15,5 +15,9 @@ export default defineConfig({
       tailwind(),
     ],
 },
-adapter: cloudflare(),
+adapter: cloudflare({
+  platformProxy: {
+        enabled: true, // IMPORTANTE: Esto permite ver logs en dev
+      }
+}),
 })

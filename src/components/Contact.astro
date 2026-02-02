@@ -15,6 +15,7 @@ let loading: boolean = false;
 let sended: boolean = false;
 
 if (Astro.request.method === "POST") {
+  console.log('local type shit')
   try {
     loading = true;
     const data = await Astro.request.formData();
