@@ -2,5 +2,5 @@
 /// <reference types="astro/client" />
 
 interface FormData {
-  entries(): IterableIterator<[string, string | File]>;
+	entries(): IterableIterator<[string, string | File]>;
 }

@@ -3,20 +3,12 @@
 
 echo '💅🏗️👷 Styling, testing and building your project before committing'
 
-# Check Prettier standards
+# Check Biome standards
 pnpm format ||
 (
     echo '🤢🤮🤢🤮 Its F**KING RAW - Your styling looks disgusting. 🤢🤮🤢🤮
-            Prettier Check Failed. Run pnpm format, add changes and try commit again.';
+            Biome Check Failed. Run pnpm format, add changes and try commit again.';
     false;
-)
-
-# Check ESLint Standards
-pnpm lint ||
-(
-        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 
-                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
-        false; 
 )
 
 # Check tsconfig standards

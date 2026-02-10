@@ -15,45 +15,45 @@ let loading: boolean = false;
 let sended: boolean = false;
 
 if (Astro.request.method === "POST") {
-  try {
-    loading = true;
-    const formData: FormData = await Astro.request.formData();
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-    const data = Object.fromEntries(formData.entries())
-    
-    if (typeof name !== "string" || name.length < 3) {
-      error = "Please enter a name. ";
-    }
-    if (typeof email !== "string" || !isValidEmail(email)) {
-      error = "Email is not valid. ";
-    }
-    if (typeof message !== "string" || message.length < 6) {
-      error = "Message must be at least 6 characters. ";
-    }
-    
-    const response: any = await fetch(`${Astro.url.origin}/api/sendmail`, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    
-    if (response.ok) {
-      sended = true
-    } else {
-      const responseText = await response.text();
-      console.log('📝 Response body:', responseText);
-      error = "server";
-    }
-  } catch (error) {
-    console.error(error)
-    if (error instanceof Error) {
-      error = "server"
-    }
-  }
+	try {
+		loading = true;
+		const formData: FormData = await Astro.request.formData();
+		const name = formData.get("name");
+		const email = formData.get("email");
+		const message = formData.get("message");
+		const data = Object.fromEntries(formData.entries());
+
+		if (typeof name !== "string" || name.length < 3) {
+			error = "Please enter a name. ";
+		}
+		if (typeof email !== "string" || !isValidEmail(email)) {
+			error = "Email is not valid. ";
+		}
+		if (typeof message !== "string" || message.length < 6) {
+			error = "Message must be at least 6 characters. ";
+		}
+
+		const response: any = await fetch(`${Astro.url.origin}/api/sendmail`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		});
+
+		if (response.ok) {
+			sended = true;
+		} else {
+			const responseText = await response.text();
+			console.log("📝 Response body:", responseText);
+			error = "server";
+		}
+	} catch (error) {
+		console.error(error);
+		if (error instanceof Error) {
+			error = "server";
+		}
+	}
 }
 ---
 

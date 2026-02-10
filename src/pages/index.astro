@@ -1,17 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import HeroParallax from '../components/HeroParallax'
-import Experience from '@/components/Experience.astro'
-import Dotfiles from '@/components/Dotfiles.astro'
-import Contact from '@/components/Contact.astro'
-import WhatIUseBtw from '@/components/WhatIUseBtw.astro'
+import Contact from "@/components/Contact.astro";
+import Dotfiles from "@/components/Dotfiles.astro";
+import Experience from "@/components/Experience.astro";
+import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
+import HeroParallax from "../components/HeroParallax";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title='Armany Web Dev Portfolio'>
   <HeroParallax client:load />
   <div class="ml-18 mr-4 md:ml-48 md:mr-16">
     <Experience />
-    <WhatIUseBtw />
+       <WhatIUseBtw />
     <Dotfiles />
     <Contact />
   </div>

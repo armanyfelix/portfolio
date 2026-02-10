@@ -6,66 +6,66 @@ import { Suspense } from "react";
 import { useEffect, useState } from "react";
 
 interface Props {
-  filePath: string;
+	filePath: string;
 }
 
 export default function ExcalidrawViewer({ filePath }: Props) {
-  const [drawingData, setDrawingData] = useState<{
-    elements: ExcalidrawElement[];
-    appState?: AppState;
-  } | null>(null);
-  const [loading, setLoading] = useState(true);
+	const [drawingData, setDrawingData] = useState<{
+		elements: ExcalidrawElement[];
+		appState?: AppState;
+	} | null>(null);
+	const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadDrawing = async () => {
-      try {
-        const response = await fetch(filePath);
-        const data = await response.json();
-        if (data.elements) {
-          setDrawingData(data);
-        }
-      } catch (error) {
-        console.error("Error loading Excalidraw file:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+	useEffect(() => {
+		const loadDrawing = async () => {
+			try {
+				const response = await fetch(filePath);
+				const data = await response.json();
+				if (data.elements) {
+					setDrawingData(data);
+				}
+			} catch (error) {
+				console.error("Error loading Excalidraw file:", error);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-    loadDrawing();
-  }, [filePath]);
+		loadDrawing();
+	}, [filePath]);
 
-  if (loading) {
-    return (
-      <div className="alert alert-soft">
-        <span className="loading loading-dots loading-lg"></span>
-        Cargando Excalidraw...
-      </div>
-    );
-  }
+	if (loading) {
+		return (
+			<div className="alert alert-soft">
+				<span className="loading loading-dots loading-lg"></span>
+				Cargando Excalidraw...
+			</div>
+		);
+	}
 
-  if (!drawingData) {
-    return <div className="alert alert-warning">Error loading Excalidraw</div>;
-  }
+	if (!drawingData) {
+		return <div className="alert alert-warning">Error loading Excalidraw</div>;
+	}
 
-  return (
-    <div className="h-200">
-      <Suspense
-        fallback={
-          <div className="alert alert-soft">
-            <span className="loading loading-dots loading-lg"></span>
-            Cargando Excalidraw...
-          </div>
-        }
-      >
-        <Excalidraw
-          initialData={drawingData}
-          viewModeEnabled={true}
-          // zenModeEnabled={false}
-          // gridModeEnabled={false}
-          theme="dark"
-          name="What I use btw"
-        />
-      </Suspense>
-    </div>
-  );
+	return (
+		<div className="h-200">
+			<Suspense
+				fallback={
+					<div className="alert alert-soft">
+						<span className="loading loading-dots loading-lg"></span>
+						Cargando Excalidraw...
+					</div>
+				}
+			>
+				<Excalidraw
+					initialData={drawingData}
+					viewModeEnabled={true}
+					// zenModeEnabled={false}
+					// gridModeEnabled={false}
+					theme="dark"
+					name="What I use btw"
+				/>
+			</Suspense>
+		</div>
+	);
 }
