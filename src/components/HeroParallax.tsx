@@ -1,12 +1,12 @@
-import { useRef } from "react";
-import { products } from "../data/proyects";
 import {
+	type MotionValue,
 	motion,
 	useScroll,
-	useTransform,
 	useSpring,
-	MotionValue,
+	useTransform,
 } from "motion/react";
+import { useRef } from "react";
+import { products } from "../data/proyects";
 
 export default function HeroParallax() {
 	const firstRow = products.slice(0, 3);

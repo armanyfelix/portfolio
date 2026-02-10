@@ -2,8 +2,7 @@ import { Excalidraw } from "@excalidraw/excalidraw";
 import type { ExcalidrawElement } from "@excalidraw/excalidraw/dist/types/excalidraw/element/types";
 import type { AppState } from "@excalidraw/excalidraw/dist/types/excalidraw/types";
 import "@excalidraw/excalidraw/index.css";
-import { Suspense } from "react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 interface Props {
 	filePath: string;

@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
 import {
 	motion,
-	useTransform,
 	useScroll,
 	// useVelocity,
 	useSpring,
+	useTransform,
 } from "motion/react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
 	const ref = useRef<HTMLDivElement>(null);

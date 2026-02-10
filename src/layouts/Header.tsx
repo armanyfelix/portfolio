@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
 import {
-	motion,
 	AnimatePresence,
-	useScroll,
+	motion,
 	useMotionValueEvent,
+	useScroll,
 } from "motion/react";
-import { cn } from "../utils/cn";
+import { useEffect, useState } from "react";
+import { type Route, routes } from "@/data/routes";
+import type { Theme } from "@/types/themes";
 import themes from "../data/themes.json";
-import { routes, type Route } from "@/data/routes";
+import { cn } from "../utils/cn";
 
 export default function Header({ className }: { className?: string }) {
 	const { scrollYProgress } = useScroll();
@@ -17,7 +18,7 @@ export default function Header({ className }: { className?: string }) {
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
 	useMotionValueEvent(scrollYProgress, "change", (current) => {
 		if (typeof current === "number") {
-			let direction = current! - scrollYProgress.getPrevious()!;
+			const direction = current - scrollYProgress.getPrevious();
 			if (scrollYProgress.get() < 0.05) {
 				setVisible(true);
 				setBackground("bg-transparent shadow-none");
@@ -54,7 +55,9 @@ export default function Header({ className }: { className?: string }) {
 			.matchMedia("(prefers-color-scheme: dark)")
 			.addEventListener("change", (event) => {
 				const newTheme = event.matches ? "dark" : "light";
-				changeTheme(newTheme);
+				localStorage.setItem("theme", newTheme);
+				setCurrentTheme(newTheme);
+				document.documentElement.setAttribute("data-theme", newTheme);
 			});
 	}, []);
 
@@ -104,6 +107,7 @@ export default function Header({ className }: { className?: string }) {
 										viewBox="0 0 24 24"
 										stroke="currentColor"
 									>
+										<title>menu open</title>
 										<path
 											strokeLinecap="round"
 											strokeLinejoin="round"
@@ -119,6 +123,7 @@ export default function Header({ className }: { className?: string }) {
 										height={24}
 										viewBox="0 0 512 512"
 									>
+										<title>menu close</title>
 										<polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
 									</svg>
 								</label>
@@ -133,18 +138,18 @@ export default function Header({ className }: { className?: string }) {
 							</div>
 							<div className="navbar-end">
 								<div className="dropdown dropdown-end">
-									<div
+									<button
+										type="button"
 										tabIndex={0}
-										role="button"
 										className="btn btn-ghost btn-square"
 									>
 										{themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
-									</div>
+									</button>
 									<ul
 										tabIndex={-1}
 										className="menu dropdown-content bg-base-300 max-h-[70dvh] overflow-auto flex-nowrap gap-y-2 rounded-box z-1 mt-4 w-60 p-2 shadow-2xl"
 									>
-										{themes.map((t: any) => (
+										{themes.map((t: Theme) => (
 											<li
 												key={t.name}
 												data-theme={t.name}
@@ -153,6 +158,7 @@ export default function Header({ className }: { className?: string }) {
 												<label
 													htmlFor={`theme-${t.name}`}
 													onClick={() => changeTheme(t.name)}
+													onKeyUp={() => changeTheme(t.name)}
 													className={`${currentTheme === t.name && "ring-2 ring-base-content"} w-full flex items-center justify-between`}
 												>
 													<input
@@ -187,18 +193,18 @@ export default function Header({ className }: { className?: string }) {
 							className="drawer-overlay"
 						></label>
 						<ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-							{routes.map((l: Route, i: number) =>
+							{routes.map((l: Route) =>
 								l.href ? (
-									<li key={i}>
+									<li key={l.name}>
 										<a href={l.href}>{l.name}</a>
 									</li>
 								) : (
-									<div key={i} tabIndex={0} className="collapse collapse-arrow">
+									<div key={l.name} className="collapse collapse-arrow">
 										<div className="collapse-title font-semibold">{l.name}</div>
 										<div className="collapse-content text-sm">
 											<ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-												{l.submenu.map((s: Route, j: number) => (
-													<li key={j}>
+												{l.submenu.map((s: Route) => (
+													<li key={s.name}>
 														<a href={s.href}>{s.name}</a>
 													</li>
 												))}

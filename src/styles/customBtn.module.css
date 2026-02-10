@@ -83,9 +83,9 @@
 	top: 0;
 	border-radius: 10%;
 	background: rgba(255, 255, 255, 1);
-	/* box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, .9), 
-  -4px -4px 5px 0px rgba(255, 255, 255, .9), 
-  7px 7px 20px 0px rgba(0, 0, 0, .2), 
+	/* box-shadow: -7px -7px 20px 0px rgba(255, 255, 255, .9),
+  -4px -4px 5px 0px rgba(255, 255, 255, .9),
+  7px 7px 20px 0px rgba(0, 0, 0, .2),
   4px 4px 5px 0px rgba(0, 0, 0, .3); */
 	transition: all 0.3s ease;
 }

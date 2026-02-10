@@ -5,12 +5,12 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
+		"check": "astro check",
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
 		"types": "tsc --pretty --noEmit",
-		"format": "exec biome format --write",
-		"prepare": "husky install"
+		"format": "exec biome format --write"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.6",
@@ -38,5 +38,8 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"husky": "^9.1.7",
 		"wrangler": "^4.63.0"
+	},
+	"engines": {
+		"node": ">=20 <25"
 	}
 }
