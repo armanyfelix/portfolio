@@ -2,27 +2,27 @@ export const products = [
   {
     title: "Felix Garages",
     link: "https://felixgarages.netlify.app",
-    thumbnail: "./public/proyects/felixgarages.png",
+    thumbnail: "/proyects/felixgarages.png",
   },
   {
     title: "GC Corporativo Juridico",
     link: "https://gc-juridic-corp.vercel.app",
-    thumbnail: "./public/proyects/gc_corporativo_juridico.png",
+    thumbnail: "/proyects/gc_corporativo_juridico.png",
   },
   {
     title: "Civity CMS",
     link: "https://app.civity.mx",
-    thumbnail: "./public/proyects/civity_cms.png",
+    thumbnail: "/proyects/civity_cms.png",
   },
   {
     title: "Civity App",
     link: "https://app.civity.mx",
-    thumbnail: "./public/proyects/civity_app.png",
+    thumbnail: "/proyects/civity_app.png",
   },
   {
     title: "Kolonus Admin App",
     link: "https://www.kolonus.com/",
-    thumbnail: "./public/proyects/kolonus_app.png",
+    thumbnail: "/proyects/kolonus_app.png",
   },
   // {
   //   title: "Algochurn",
