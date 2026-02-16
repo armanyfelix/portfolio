@@ -24,7 +24,7 @@ export default function HeroParallax() {
 		springConfig,
 	);
 	const translateXReverse = useSpring(
-		useTransform(scrollYProgress, [0.2, 1], [0, -1000]),
+		useTransform(scrollYProgress, [0.2, 1], [150, -1000]),
 		springConfig,
 	);
 	1;
@@ -41,14 +41,14 @@ export default function HeroParallax() {
 		springConfig,
 	);
 	const translateY = useSpring(
-		useTransform(scrollYProgress, [0, 0.2], [-1000, 100]),
+		useTransform(scrollYProgress, [0, 0.2], [-590, 400]),
 		springConfig,
 	);
 	return (
 		<section
 			id="Proyects"
 			ref={ref}
-			className="h-[280dvh] relative antialiased flex flex-col self-auto perspective-midrange transform-3d"
+			className="h-[350dvh] relative antialiased flex flex-col slf-auto perspective-midrange transform-3d"
 		>
 			<Text />
 			<motion.div
@@ -62,20 +62,40 @@ export default function HeroParallax() {
 			>
 				<motion.div className="flex flex-row space-x-10 mb-20">
 					{firstRow.map((product) => (
-						<ProductCard
-							product={product}
-							translate={translateX}
-							key={product.title}
-						/>
+						<>
+							{product.type === "mobile" ? (
+								<ProductCardMobile
+									product={product}
+									translate={translateXReverse}
+									key={product.title}
+								/>
+							) : (
+								<ProductCard
+									product={product}
+									translate={translateXReverse}
+									key={product.title}
+								/>
+							)}
+						</>
 					))}
 				</motion.div>
-				<motion.div className="flex flex-row  mb-20 space-x-10 ">
+				<motion.div className="flex flex-row  mb-20 space-x-10">
 					{secondRow.map((product) => (
-						<ProductCard
-							product={product}
-							translate={translateXReverse}
-							key={product.title}
-						/>
+						<>
+							{product.type === "mobile" ? (
+								<ProductCardMobile
+									product={product}
+									translate={translateXReverse}
+									key={product.title}
+								/>
+							) : (
+								<ProductCard
+									product={product}
+									translate={translateXReverse}
+									key={product.title}
+								/>
+							)}
+						</>
 					))}
 				</motion.div>
 			</motion.div>
@@ -85,7 +105,7 @@ export default function HeroParallax() {
 
 export const Text = () => {
 	return (
-		<div className="pt-20 md:pt-48 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
+		<div className="pt-20 md:pt-68 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
 			{/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
         Software developer
         </h1> */}
@@ -108,11 +128,7 @@ export const ProductCard = ({
 	product,
 	translate,
 }: {
-	product: {
-		title: string;
-		link: string;
-		thumbnail: string;
-	};
+	product: any;
 	translate: MotionValue<number>;
 }) => {
 	return (
@@ -124,7 +140,42 @@ export const ProductCard = ({
 				y: -20,
 			}}
 			key={product.title}
-			className="group/product h-96 w-120 relative shrink-0"
+			className="group/product h-auto w-120 aspect-video relative shrink-0"
+		>
+			<a href={product.link} className="block group-hover/product:shadow-2xl ">
+				<img
+					src={product.thumbnail}
+					height="600"
+					width="600"
+					className="object-cover object-center absolute h-full w-full inset-0"
+					alt={product.title}
+				/>
+			</a>
+			<div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
+			<h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
+				{product.title}
+			</h2>
+		</motion.div>
+	);
+};
+
+export const ProductCardMobile = ({
+	product,
+	translate,
+}: {
+	product: any;
+	translate: MotionValue<number>;
+}) => {
+	return (
+		<motion.div
+			style={{
+				x: translate,
+			}}
+			whileHover={{
+				y: -20,
+			}}
+			key={product.title}
+			className="group/product h96 w-32 aspect- relative shrink-0"
 		>
 			<a href={product.link} className="block group-hover/product:shadow-2xl ">
 				<img

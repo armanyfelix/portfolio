@@ -16,6 +16,13 @@
 					"correctness": {
 						"noUnusedVariables": "off",
 						"noUnusedImports": "off"
+					},
+					"suspicious": {
+						"noUnknownAtRules": {
+							"options": {
+								"ignore": ["plugin", "apply"]
+							}
+						}
 					}
 				}
 			}
