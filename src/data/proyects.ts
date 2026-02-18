@@ -5,7 +5,7 @@ export interface Product {
 	type: "mobile" | "desktop";
 }
 
-export const products = [
+export const products: Product[] = [
 	{
 		title: "Felix Garages",
 		link: "https://felixgarages.netlify.app",

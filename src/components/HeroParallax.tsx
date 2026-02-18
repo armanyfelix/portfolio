@@ -6,7 +6,7 @@ import {
 	useTransform,
 } from "motion/react";
 import { useRef } from "react";
-import { products } from "../data/proyects";
+import { products, type Product } from "../data/proyects";
 
 export default function HeroParallax() {
 	const firstRow = products.slice(0, 3);
@@ -29,7 +29,7 @@ export default function HeroParallax() {
 	);
 	1;
 	const rotateX = useSpring(
-		useTransform(scrollYProgress, [0, 0.2], [15, 0]),
+		useTransform(scrollYProgress, [0, 0.2], [25, 0]),
 		springConfig,
 	);
 	const opacity = useSpring(
@@ -48,9 +48,9 @@ export default function HeroParallax() {
 		<section
 			id="Proyects"
 			ref={ref}
-			className="h-[350dvh] relative antialiased flex flex-col slf-auto perspective-midrange transform-3d"
+			className="h-[200dvh] relative antialiased flex flex-col slf-auto perspective-midrange transform-3d"
 		>
-			<Text />
+			<About />
 			<motion.div
 				style={{
 					rotateX,
@@ -61,26 +61,26 @@ export default function HeroParallax() {
 				className=""
 			>
 				<motion.div className="flex flex-row space-x-10 mb-20">
-					{firstRow.map((product) => (
+					{firstRow.map((product: Product) => (
 						<>
 							{product.type === "mobile" ? (
 								<ProductCardMobile
 									product={product}
-									translate={translateXReverse}
+									translate={translateX}
 									key={product.title}
 								/>
 							) : (
 								<ProductCard
 									product={product}
-									translate={translateXReverse}
+									translate={translateX}
 									key={product.title}
 								/>
 							)}
 						</>
 					))}
 				</motion.div>
-				<motion.div className="flex flex-row  mb-20 space-x-10">
-					{secondRow.map((product) => (
+				<motion.div className="flex flex-row mb-20 space-x-10">
+					{secondRow.map((product: Product) => (
 						<>
 							{product.type === "mobile" ? (
 								<ProductCardMobile
@@ -103,32 +103,11 @@ export default function HeroParallax() {
 	);
 }
 
-export const Text = () => {
-	return (
-		<div className="pt-20 md:pt-68 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
-			{/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
-        Software developer
-        </h1> */}
-			<p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
-				I'm a developer who crafts primarily with TypeScript, with a passion for
-				Linux and open-source software.
-				<br />
-				<br />
-				With 4 years of experience, I specialize in cross-platform development
-				with web technologies, full responsive to deploy everywere.
-				<br />
-				<br />I believe in a web owned by its users, and I'm dedicated to making
-				it better. Forever learning, always building.
-			</p>
-		</div>
-	);
-};
-
 export const ProductCard = ({
 	product,
 	translate,
 }: {
-	product: any;
+	product: Product;
 	translate: MotionValue<number>;
 }) => {
 	return (
@@ -140,7 +119,7 @@ export const ProductCard = ({
 				y: -20,
 			}}
 			key={product.title}
-			className="group/product h-auto w-120 aspect-video relative shrink-0"
+			className="group/product h-80 w-100 relative shrink-0"
 		>
 			<a href={product.link} className="block group-hover/product:shadow-2xl ">
 				<img
@@ -163,7 +142,7 @@ export const ProductCardMobile = ({
 	product,
 	translate,
 }: {
-	product: any;
+	product: Product;
 	translate: MotionValue<number>;
 }) => {
 	return (
@@ -175,7 +154,7 @@ export const ProductCardMobile = ({
 				y: -20,
 			}}
 			key={product.title}
-			className="group/product h96 w-32 aspect- relative shrink-0"
+			className="group/product h-80 w-40 aspect- relative shrink-0"
 		>
 			<a href={product.link} className="block group-hover/product:shadow-2xl ">
 				<img
@@ -191,5 +170,26 @@ export const ProductCardMobile = ({
 				{product.title}
 			</h2>
 		</motion.div>
+	);
+};
+
+export const About = () => {
+	return (
+		<div className="pt-20 md:pt-68 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
+			{/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
+        Software developer
+        </h1> */}
+			<p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
+				I'm a developer who crafts primarily with TypeScript, with a passion for
+				Linux and open-source software.
+				<br />
+				<br />
+				With 4 years of experience, I specialize in cross-platform development
+				with web technologies, full responsive to deploy everywere.
+				<br />
+				<br />I believe in a web owned by its users, and I'm dedicated to making
+				it better. Forever learning, always building.
+			</p>
+		</div>
 	);
 };

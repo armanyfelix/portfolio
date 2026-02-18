@@ -1,11 +1,9 @@
 {
 	"name": "portfolio",
 	"type": "module",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"scripts": {
 		"dev": "astro dev",
-		"start": "astro dev",
-		"check": "astro check",
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
@@ -26,7 +24,7 @@
 		"clsx": "^2.1.1",
 		"daisyui": "^5.5.18",
 		"dotenv": "^17.3.1",
-		"motion": "^12.34.0",
+		"motion": "^12.34.1",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",
 		"tailwind-merge": "^3.4.1",
@@ -34,10 +32,10 @@
 		"typescript": "^5.9.3"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.0",
+		"@biomejs/biome": "2.4.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"husky": "^9.1.7",
-		"wrangler": "^4.65.0"
+		"wrangler": "^4.66.0"
 	},
 	"engines": {
 		"node": ">=20 <25"
