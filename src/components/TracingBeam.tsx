@@ -25,14 +25,14 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
 	}, []);
 
 	const y1 = useSpring(
-		useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+		useTransform(scrollYProgress, [0, 0.8], [0, svgHeight]),
 		{
 			stiffness: 500,
 			damping: 90,
 		},
 	);
 	const y2 = useSpring(
-		useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
+		useTransform(scrollYProgress, [0, 1], [0, svgHeight - 200]),
 		{
 			stiffness: 500,
 			damping: 90,
@@ -55,7 +55,6 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
 					}}
 					className="ml-6.5 h-4 w-4 loading loading-ring duration-1000 loading-sm"
 				>
-					dscfvscs
 					<motion.div
 						transition={{
 							duration: 0.2,
@@ -71,7 +70,7 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
 					/>
 				</motion.div>
 				<svg
-					viewBox={`0 0 20 ${svgHeight}`}
+					viewBox={`0 0 20 ${svgHeight + 800}`}
 					width="20"
 					height={svgHeight} // Set the SVG height
 					className="ml-4 block"
@@ -90,7 +89,7 @@ export const TracingBeam = ({ children }: { children: React.ReactNode }) => {
 						d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
 						fill="none"
 						stroke="url(#gradient)"
-						strokeWidth="1.25"
+						strokeWidth="2.25"
 						className="motion-reduce:hidden"
 						transition={{
 							duration: 10,
