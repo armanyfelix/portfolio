@@ -1,10 +1,9 @@
 // @ts-check
-
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,4 +19,19 @@ export default defineConfig({
 		},
 		imageService: "compile",
 	}),
+	env: {
+		schema: {
+			EMAIL_SENDER: envField.string({ context: "server", access: "public" }),
+			EMAIL_RECEIVER: envField.string({ context: "server", access: "secret" }),
+			EMAIL: envField.string({ context: "server", access: "secret" }),
+			EMAIL_PASSWORD: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+			BREVO_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+		},
+	},
 });

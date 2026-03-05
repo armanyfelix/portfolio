@@ -2,19 +2,26 @@
 import ExcalidrawViewer from "./ExcalidrawViewer";
 ---
 
-<section id="whatIUseBtw" class="mt-20 pt-16">  
-  <h1 class="text-5xl font-bold mb-10">What I use btw</h1>
-  <!-- <ul class="flex items-center justify-evenly">
-  {['linux', 'terminal', 'webdev', 'servers'].map((l) => (
-  <li>
-  <a href={`/${l}`} class="link link-accent text-4xl capitalize">{l}</a>
-  </li>
-  ))}
-  </ul> -->
-  <div>
-    <ExcalidrawViewer filePath="/btw.excalidraw" client:only />
-  </div>
-  <!-- {resources &&
+<section id="whatIUseBtw" class="mt-20 pt-16">
+    <h1 class="text-5xl font-bold mb-10">What I use btw</h1>
+    <ul class="flex items-center justify-evenly">
+        {
+            ["linux", "terminal", "dev", "servers"].map((l) => (
+                <li>
+                    <a
+                        href={`/${l}`}
+                        class="lin text-amber-500 font- text-4xl capitalize"
+                    >
+                        {l}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+    <div>
+        <ExcalidrawViewer filePath="/btw.excalidraw" client:only />
+    </div>
+    <!-- {resources &&
   resources.map((r) => (
   <div class="card image-full w-96 bg-base-100 text-neutral shadow-xl">
   <figure>
@@ -24,7 +31,7 @@ import ExcalidrawViewer from "./ExcalidrawViewer";
   width={384}
   height={208}
   alt=""
-  /> 
+  />
   image
   </figure>
   <div class="card-body">
@@ -32,7 +39,7 @@ import ExcalidrawViewer from "./ExcalidrawViewer";
   <p class="font-mono tracking-tighter">{r.description}</p>
   <div class="card-actions justify-end">
   <a href={r.url} target="_blank" class="btn btn-primary px-3">
-  <ArrowTopRightOnSquareIcon class="h-5 w-5" /> 
+  <ArrowTopRightOnSquareIcon class="h-5 w-5" />
   </a>
   </div>
   </div>
