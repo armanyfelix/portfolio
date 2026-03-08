@@ -8,11 +8,24 @@ export const POST: APIRoute = async ({ request, locals }: APIContext) => {
 		const email = data.email;
 		const name = data.name;
 		const message = data.message;
+		const company = data.company;
 
 		if (!email || !name || !message) {
 			return new Response(
 				JSON.stringify({
 					message: "Missing required fields",
+				}),
+				{ status: 400 },
+			);
+		}
+
+		// 1. Honeypot check
+		if (company) {
+			console.log("company honeypoted");
+			throw new Response(
+				JSON.stringify({
+					error: true,
+					message: "Invalid submission detected",
 				}),
 				{ status: 400 },
 			);
@@ -142,7 +155,6 @@ export const POST: APIRoute = async ({ request, locals }: APIContext) => {
 			{ status: 200 },
 		);
 	} catch (error) {
-		console.log(error);
 		return new Response(
 			JSON.stringify({
 				error: true,

@@ -175,20 +175,25 @@ export const ProductCardMobile = ({
 
 export const About = () => {
 	return (
-		<div className="pt-20 md:pt-68 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full">
+		<div className="pt-20 md:pt-68 ml-18 mr-4 lg:ml-48 lg:mr-16 w-full max-w-4xl text-base font-mono md:text-2xl mt-8">
 			{/* <h1 className="text-2xl md:text-7xl font-bold text-primary">
         Software developer
         </h1> */}
-			<p className="max-w-4xl text-base font-mono md:text-2xl mt-8">
-				I'm a developer who crafts primarily with TypeScript, with a passion for
-				Linux and open-source software.
-				<br />
-				<br />
+			<motion.div>
+				<p>
+					I'm a developer who crafts primarily with TypeScript, with a passion
+					for Linux and open-source software.
+				</p>
+			</motion.div>
+			<br />
+			<p>
 				With 4 years of experience, I specialize in cross-platform development
 				with web technologies, full responsive to deploy everywere.
-				<br />
-				<br />I believe in a web owned by its users, and I'm dedicated to making
-				it better. Forever learning, always building.
+			</p>
+			<br />
+			<p>
+				I believe in a web owned by its users, and I'm dedicated to making it
+				better. Forever learning, always building.
 			</p>
 		</div>
 	);

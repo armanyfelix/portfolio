@@ -7,7 +7,7 @@
 		"allowJs": false,
 		"jsx": "react-jsx",
 		"jsxImportSource": "react",
-		"lib": ["DOM", "ESNext"],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"baseUrl": ".",

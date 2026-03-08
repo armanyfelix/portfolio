@@ -9,8 +9,9 @@ import ExcalidrawViewer from "./ExcalidrawViewer";
             ["linux", "terminal", "web-dev", "server"].map((l) => (
                 <li>
                     <a
+                        transition:animate="initial"
                         href={`/${l}`}
-                        class="lin text-amber-500 font- text-4xl capitalize"
+                        class="link text-amber-500 font- text-4xl capitalize"
                     >
                         {l}
                     </a>
@@ -18,9 +19,9 @@ import ExcalidrawViewer from "./ExcalidrawViewer";
             ))
         }
     </ul>
-    <div>
+    <!-- <div>
         <ExcalidrawViewer filePath="/btw.excalidraw" client:only />
-    </div>
+    </div> -->
     <!-- {resources &&
   resources.map((r) => (
   <div class="card image-full w-96 bg-base-100 text-neutral shadow-xl">

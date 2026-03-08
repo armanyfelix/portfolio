@@ -43,17 +43,26 @@ if (Astro.request.method === "POST") {
 
 		if (response.ok) {
 			sended = true;
+			setTimeout(() => {
+				sended = false;
+			}, 5000);
 		} else {
-			const responseText = await response.text();
-			console.log("📝 Response body:", responseText);
+			// const responseText = await response.text();
+			// console.log("📝 Response body:", responseText);
 			error = "server";
+			setTimeout(() => {
+				error = "";
+			}, 5000);
 		}
 	} catch (error) {
-		console.error(error);
 		if (error instanceof Error) {
 			error = "server";
 		}
+		setTimeout(() => {
+			error = "";
+		}, 5000);
 	}
+	loading = false;
 }
 ---
 
@@ -104,7 +113,7 @@ if (Astro.request.method === "POST") {
               name="name"
               class="input validator"
               minlength="3"
-              maxlength="30"
+              maxlength="30"data-auto-hide="5000"
               placeholder="your name"
               required
               />
@@ -121,7 +130,17 @@ if (Astro.request.method === "POST") {
                 required
               />
               <span class="hidden validator-hint">Enter valid email address</span>
-
+              
+              <!-- Honeypot -->
+              <input
+                type="text"
+                name="company"
+                style="position:absolute;left:-9999px;width:1px;height:1px;"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+              
               <label class="label">Message</label>
               <textarea
                 name="message"
@@ -150,24 +169,37 @@ if (Astro.request.method === "POST") {
     </div>
   </div>
   {error === "server" ? (
-    <button
-      class="alert alert-error fixed left-3 right-3 top-2 z-50 w-full"
+    <div
+      class="alert alert-error fixed right-4 bottom-4 z-50 w-auto"
+      data-auto-hide="5000"
     >
       <ErrorCircleIcon />
       <span>
         Error! The mail could not be sent, please try a again later. 😬
       </span>
-    </button>
+    </div>
   ) : (
     sended === true && (
-      <button
-        class="alert alert-success fixed right-1/2 top-24 z-50 w-auto translate-x-1/2"
+      <div
+        class="alert alert-success fixed left-4 bottom-4 z-50 w-auto"
+        data-auto-hide="5000"
       >
         <CheckCircleIcon />
         <span>
           The mail was send successfully! I will answer you ASAP. ✌️😁
         </span>
-      </button>
+      </div>
     )
   )}
 </section>
+
+<script>
+  document.querySelectorAll('[data-auto-hide]').forEach(el => {
+    if (el instanceof HTMLElement) {
+      const timeout = parseInt(el.dataset.autoHide || '5000', 10);
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, timeout);
+    }
+  });
+</script>
