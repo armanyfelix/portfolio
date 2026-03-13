@@ -3,17 +3,17 @@ import Contact from "@/components/Contact.astro";
 import Dotfiles from "@/components/Dotfiles.astro";
 import Experience from "@/components/Experience.astro";
 import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
-import HeroParallax from "../components/HeroParallax.astro";
+import HeroParallax from "../components/HeroParallax.tsx";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Armany Web Dev Portfolio">
-    <section
+    <!-- <section
         id="about-section"
         class="container mx-auto space-y-6 px-4 py-24 lg:py-32"
     >
         <div class="mx-auto w-fit">
-            <!-- <MarqueeText text={t("index.about.marqueetext")} /> -->
+            <MarqueeText text={t("index.about.marqueetext")} />
         </div>
         <h2
             class="about-title font-boldonse mx-auto max-w-5xl text-center text-2xl leading-normal uppercase md:text-5xl"
@@ -31,18 +31,18 @@ import Layout from "../layouts/Layout.astro";
             class="about-btn mx-auto flex w-fit justify-center gap-4"
             style="visibility: hidden;"
         >
-            <!-- <button
+            <button
                 variant="primary"
                 effect="shadowOffsetDark"
                 size="lg"
                 class="uppercase md:px-20"
             >
                 index.about.btn
-            </button> -->
+            </button>
         </div>
-    </section>
-    <!-- <HeroParallax client:load /> -->
-    <HeroParallax />
+    </section> -->
+    <HeroParallax client:load />
+    <!-- <HeroParallax /> -->
     <div class="ml-18 mr-4 md:ml-48 md:mr-16">
         <Experience />
         <WhatIUseBtw />
