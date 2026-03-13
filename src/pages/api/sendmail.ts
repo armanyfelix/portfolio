@@ -1,7 +1,8 @@
 import type { APIContext, APIRoute } from "astro";
+import { BREVO_API_KEY, EMAIL_SENDER, EMAIL_RECEIVER } from "astro:env/server";
 
-export const POST: APIRoute = async ({ request, locals }: APIContext) => {
-	const { BREVO_API_KEY, EMAIL_SENDER, EMAIL_RECEIVER } = locals.runtime.env;
+export const POST: APIRoute = async ({ request }: APIContext) => {
+	// const { BREVO_API_KEY, EMAIL_SENDER, EMAIL_RECEIVER } = locals.runtime.env;
 
 	try {
 		const data = await request.json();

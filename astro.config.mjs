@@ -12,6 +12,9 @@ export default defineConfig({
 	integrations: [sitemap(), react()],
 	vite: {
 		plugins: [tailwind()],
+		ssr: {
+			noExternal: ["gsap"],
+		},
 	},
 	adapter: cloudflare({
 		platformProxy: {
