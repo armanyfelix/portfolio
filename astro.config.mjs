@@ -24,7 +24,7 @@ export default defineConfig({
 	}),
 	env: {
 		schema: {
-			EMAIL_SENDER: envField.string({ context: "server", access: "public" }),
+			EMAIL_SENDER: envField.string({ context: "server", access: "secret" }),
 			EMAIL_RECEIVER: envField.string({ context: "server", access: "secret" }),
 			BREVO_API_KEY: envField.string({
 				context: "server",
