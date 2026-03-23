@@ -12,30 +12,27 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta name='description' content='Astro description' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
-    <meta name='generator' content={Astro.generator} />
-    <title>{title}</title>
-    <ClientRouter />
-  </head>
-  <body class=" from-primary/10 via-base-100 to-secondary/15 bg-linear-to-b">
-    <div class="z-50 grid min-h-dvh grid-rows-[auto_1fr_auto]">
-      <Header client:load />
-      <main class="overflow-hidden">
-        <TracingBeam client:load>
-          <slot />
-        </TracingBeam>
-      </main>
-      <div class="m-3">
-        <Footer />
-      </div>
-    </div>
-    <!-- <div class="z-0">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <ClientRouter />
+    </head>
+    <body class="from-primary/10 via-base-100 to-secondary/15 bg-linear-to-b">
+        <div class="z-50 grid min-h-dvh grid-rows-[auto_1fr_auto]">
+            <Header client:load />
+            <main class="overflow-hidden">
+        
+                    <slot />
+            </main>
+            <!-- <Footer /> -->
+        </div>
+        <!-- <div class="z-0">
       <Background />
     </div> -->
-  </body>
+    </body>
 </html>

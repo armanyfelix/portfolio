@@ -1,0 +1,145 @@
+---
+// import  { Icon } from "astro-icon/components";
+
+interface Props {
+	text?: string;
+	speed?: number;
+	className?: string;
+	showIcon?: boolean;
+	dark?: boolean;
+}
+
+const {
+	text = "ABOUT US",
+	speed = 10,
+	className = "",
+	showIcon = true,
+	dark = false,
+} = Astro.props;
+---
+
+<div class={`inline-flex items-center ${className}`}>
+    <!-- {
+        showIcon && (
+            <div class="shrink-0">
+                <Icon
+                    name="asterisk"
+                    class={`h-4 w-4 ${dark ? "text-muted-light" : "text-dark"} sm:h-5 sm:w-5 lg:h-6 lg:w-6`}
+                />
+            </div>
+        )
+    } -->
+
+    <div
+        class="marquee relative w-full max-w-[200px] overflow-hidden sm:max-w-[250px] md:max-w-[300px]"
+        data-theme={dark}
+    >
+        <div class="marquee__inner flex w-fit" data-speed={speed}>
+            {
+                Array.from({ length: 8 }).map(() => (
+                    <div class="marquee__part text-muted flex shrink-0 items-center whitespace-nowrap">
+                        <span
+                            class={`text-sm uppercase sm:text-base ${dark ? "text-muted-light" : "text-dark"}`}
+                        >
+                            {text}
+                        </span>
+                        <span
+                            class={`px-2 sm:px-3 ${dark ? "text-muted-light" : "text-dark"}`}
+                        >
+                            —
+                        </span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    import gsap from "gsap";
+
+    function initMarquee() {
+        const marqueeInners =
+            document.querySelectorAll<HTMLElement>(".marquee__inner");
+
+        marqueeInners.forEach((inner) => {
+            const speed = parseFloat(inner.getAttribute("data-speed") || "15");
+            const firstItem =
+                inner.querySelector<HTMLElement>(".marquee__part");
+
+            if (!firstItem) return;
+
+            const itemWidth = firstItem.offsetWidth;
+
+            gsap.fromTo(
+                inner,
+                {
+                    x: 0,
+                },
+                {
+                    x: -itemWidth,
+                    duration: speed,
+                    ease: "none",
+                    repeat: -1,
+                    modifiers: {
+                        x: gsap.utils.unitize((x) => parseFloat(x) % itemWidth),
+                    },
+                },
+            );
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initMarquee);
+    } else {
+        initMarquee();
+    }
+
+    document.addEventListener("astro:page-load", initMarquee);
+</script>
+
+<style>
+    .marquee::before,
+    .marquee::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    @media (min-width: 640px) {
+        .marquee::before,
+        .marquee::after {
+            width: 60px;
+        }
+    }
+
+    .marquee::before {
+        left: 0;
+        background: linear-gradient(
+            to right,
+            var(--color-primary),
+            transparent
+        );
+    }
+
+    .marquee::after {
+        right: 0;
+        background: linear-gradient(to left, var(--color-primary), transparent);
+    }
+
+    .marquee[data-theme="true"]::before {
+        background: linear-gradient(to right, var(--color-body), transparent);
+    }
+
+    .marquee[data-theme="true"]::after {
+        background: linear-gradient(to left, var(--color-body), transparent);
+    }
+
+    .marquee__inner {
+        -webkit-font-smoothing: antialiased;
+    }
+</style>
