@@ -6,15 +6,7 @@ const firstRow = products.slice(0, 3);
 const secondRow = products.slice(3, 6);
 ---
 
-<div
-    id="Proyects"
-    class=" antialiased relative flexflex-col perspective-midrange transform-3d"
->
-
-    <!-- Spacer so that the content starts after the hero -->
-    <div class="h-dvh"></div>
-
-    <!-- <div class="parallax-container">
+<!-- <div class="parallax-container">
         <div class="first-row flex flex-row space-x-10 mb-20">
             {
                 firstRow.map((product) => (
@@ -30,63 +22,47 @@ const secondRow = products.slice(3, 6);
             }
         </div>
     </div> -->
-    <section id="portfolio">
-        <div class="container-fluid parallax-container">
-            <div class="horiz-gallery-wrapper">
-                <div class="horiz-gallery-strip">
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-1.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-2.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-3.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-4.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-5.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-6.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-7.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="project-wrap">
-                        <img
-                            src="https://assets.codepen.io/16327/portrait-image-8.jpg"
-                            alt=""
-                        />
-                    </div>
+<section
+    id="proyects"
+    class="antialiased relative flex flex-col perspective-midrange transform-3d"
+>
+    <div class="parallax-container flex flex-row space-x-10 mb-20">
+        <div class="horiz-gallery-wrapper">
+            <div class="horiz-gallery-strip">
+                <button class="project-wrap hover:brightness-0">
+                    <img
+                        src="https://assets.codepen.io/16327/portrait-image-1.jpg"
+                        alt="1"
+                    />
+                </button>
+                <div class="project-wrap">
+                    <img
+                        src="https://assets.codepen.io/16327/portrait-image-2.jpg"
+                        alt="2"
+                    />
+                </div>
+                <div class="project-wrap">
+                    <img
+                        src="https://assets.codepen.io/16327/portrait-image-3.jpg"
+                        alt="3"
+                    />
+                </div>
+                <div class="project-wrap product-card">
+                    <img
+                        src="https://assets.codepen.io/16327/portrait-image-1.jpg"
+                        alt="1"
+                    />
+                </div>
+                <div class="project-wrap">
+                    <img
+                        src="https://assets.codepen.io/16327/portrait-image-2.jpg"
+                        alt="2"
+                    />
                 </div>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
 
 <style is:global>
     /* Estilos necesarios para las transformaciones 3D y perspectiva */
@@ -102,17 +78,6 @@ const secondRow = products.slice(3, 6);
         will-change: transform;
     }
 
-    .row,
-    .section,
-    section {
-        position: relative;
-        overflow: hidden;
-    }
-    .section,
-    section {
-        text-align: center;
-    }
-
     .container-fluid {
         width: 100%;
         padding-right: 0;
@@ -124,13 +89,14 @@ const secondRow = products.slice(3, 6);
     .horiz-gallery-strip,
     .horiz-gallery-wrapper {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         will-change: transform;
         position: relative;
+        justify-content: center;
     }
 
     .project-wrap {
-        width: 33vw;
+        width: 28vw;
         padding: 2rem;
         box-sizing: content-box;
     }
@@ -148,28 +114,63 @@ const secondRow = products.slice(3, 6);
 
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-    const smoother = ScrollSmoother.create({
+    ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
         smooth: 2,
         normalizeScroll: true,
         ignoreMobileResize: true,
-        preventDefault: true,
     });
 
-    //Horizontal Scroll Galleries
-    if (document.getElementById("portfolio")) {
+    if (document.getElementById("proyects")) {
+        window.addEventListener("load", () => {
+            const section = document.getElementById("proyects");
+            if (!section) return;
+
+            const container = document.querySelector(".parallax-container");
+            // const secondRowCards = document.querySelectorAll(
+            //     ".second-row .product-card",
+            // );
+            // const allCards = document.querySelectorAll(".product-card");
+
+            // --- Valores iniciales (progreso 0) ---
+            gsap.set(container, {
+                rotateX: 30,
+                rotateZ: 20,
+                y: -600,
+                opacity: 0.05,
+            });
+
+            gsap.to(container, {
+                scrollTrigger: {
+                    trigger: section, // La sección que activa la animación
+                    start: "top center", // Cuando el borde superior de la sección toca el borde inferior de la ventana (empieza a entrar)
+                    end: "top top", // Cuando el borde superior de la sección llega al borde superior de la ventana (entra completamente)
+                    scrub: true, // Suavizado con el scroll
+                    // pin: true,
+                    // anticipatePin: 1,
+                    // markers: true, // Activa para ver los puntos de inicio y fin (útil para depurar)
+                },
+                rotateX: 0,
+                rotateZ: 0,
+                y: 0,
+                opacity: 1,
+                ease: "none",
+            });
+        });
+
+        //Horizontal Scroll Galleries
         const horizontalSections = gsap.utils.toArray(".horiz-gallery-wrapper");
 
         horizontalSections.forEach(function (sec: any, i) {
             const pinWrap = sec.querySelector(".horiz-gallery-strip");
 
             let pinWrapWidth: any;
-            let horizontalScrollLength: any;
+            // let horizontalScrollLength: any;
 
             function refresh() {
                 pinWrapWidth = pinWrap.scrollWidth;
-                horizontalScrollLength = pinWrapWidth - window.innerWidth;
+                // horizontalScrollLength = pinWrapWidth - window.innerWidth;
             }
 
             refresh();
@@ -179,11 +180,14 @@ const secondRow = products.slice(3, 6);
                     scrub: true,
                     trigger: sec,
                     pin: sec,
-                    start: "center center",
+                    start: "top top",
                     end: () => `+=${pinWrapWidth}`,
                     invalidateOnRefresh: true,
+                    // markers: true,
                 },
-                x: () => -horizontalScrollLength,
+                // x: () => -horizontalScrollLength,
+                x: 700,
+                opacity: 0,
                 ease: "none",
             });
 
@@ -285,23 +289,7 @@ import gsap from "gsap";
             },
         });
 
-        // --- Efecto hover en las tarjetas (translateY) ---
-        allCards.forEach((card) => {
-            card.addEventListener("mouseenter", () => {
-                gsap.to(card, {
-                    "--y": "-20px",
-                    duration: 0.2,
-                    ease: "power2.out",
-                });
-            });
-            card.addEventListener("mouseleave", () => {
-                gsap.to(card, {
-                    "--y": "0px",
-                    duration: 0.2,
-                    ease: "power2.out",
-                });
-            });
-        });
+
 
         // Opcional: refrescar ScrollTrigger para cálculos precisos
         ScrollTrigger.refresh();

@@ -8,9 +8,7 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "react",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"baseUrl": ".",
 		"paths": {
 			"@/*": ["./src/*"],
 			"p/*": ["./public/*"]
