@@ -131,9 +131,9 @@ export default function Header({ className }: { className?: string }) {
 							<div className="navbar-center">
 								<a
 									href="/"
-									className="btn btn-ghost text-primary! font-mono font-bold capitalize text-3xl"
+									className="btn btn-ghost text-primary! font-mono font-bold text-3xl"
 								>
-									ARMANY
+									armany
 								</a>
 							</div>
 							<div className="navbar-end">
@@ -141,10 +141,9 @@ export default function Header({ className }: { className?: string }) {
 									<button
 										type="button"
 										tabIndex={0}
-										className="btn btn-ghost btn-square"
+										className="btn btn-ghost btn-square text-xl"
 									>
-										{/*{themes.find((t) => t.name === currentTheme)?.emoji || "🎨vds"}*/}
-										&#128512;
+										{themes.find((t) => t.name === currentTheme)?.emoji || "🎨"}
 									</button>
 									<ul
 										tabIndex={-1}

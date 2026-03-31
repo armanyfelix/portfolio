@@ -1,49 +1,32 @@
 ---
 import { proyects } from "../data/proyects";
-import ProductCard from "./ProductCard.astro";
 ---
 
-<!-- <div class="parallax-container">
-        <div class="first-row flex flex-row space-x-10 mb-20">
-            {
-                firstRow.map((product) => (
-                    <ProductCard product={product} key={product.title} />
-                ))
-            }
-        </div>
-        <div class="second-row flex flex-row space-x-10 mb-20">
-            {
-                secondRow.map((product) => (
-                    <ProductCard product={product} key={product.title} />
-                ))
-            }
-        </div>
-    </div> -->
 <section
     id="proyects"
-    class="antialiased relative flex flex-col pb-96 xl:px-30 perspective-midrange transform-3d"
+    class="antialiased relative flex flex-col pb-96 perspective-midrange transform-3d"
 >
     <div class="parallax-container flex flex-row space-x-10 mb-20">
         <div class="horiz-gallery-wrapper">
-            <div class="horiz-gallery-strip gap-9">
+            <div class="horiz-gallery-strip gap-9 pt-20">
                 {
                     proyects.map((p: any) => (
                         <div
-                            class={`product-card ${p.type === "mobile" ? "w-36" : "w-[26vw]"} h-[21vw] box-content shrink-0 group`}
+                            class={`product-card ${p.type === "mobile" ? "w-36" : "w-[26vw]"} hover:scale-105 duration-300 rounded ease-in-out h-[21vw] box-content shrink-0 group`}
                             data-product-title={p.title}
                         >
                             <a
                                 href={p.link}
-                                class="block group-hover:shadow-2xl h-full"
+                                class="block group-hover:shadow-2xl h-full rounded"
                             >
                                 <img
                                     src={p.thumbnail}
                                     alt={p.title}
-                                    class="object-cover object-center  inset-0 h-full w-full"
+                                    class="object-cover object-center rounded inset-0 h-full w-full"
                                 />
                             </a>
-                            <div class="absolute inset-0 h-full w-full opacity-0 group-hover:opacity-80 bg-black pointer-events-none" />
-                            <h2 class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 text-white">
+                            <div class="absolute inset-0 h-full w-full opacity-0 rounded group-hover:opacity-80 bg-black pointer-events-none" />
+                            <h2 class="absolute bottom-4 left-4 opacity-0 rounded group-hover:opacity-100 text-white">
                                 {p.title}
                             </h2>
                         </div>
@@ -55,25 +38,9 @@ import ProductCard from "./ProductCard.astro";
 </section>
 
 <style is:global>
-    /* Estilos necesarios para las transformaciones 3D y perspectiva */
-    .perspective-midrange {
-        perspective: 1000px;
-    }
-    .transform-3d {
-        transform-style: preserve-3d;
-    }
-    /* Las tarjetas usan variables CSS para el desplazamiento horizontal y vertical */
     .product-card {
         transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
         will-change: transform;
-    }
-
-    .container-fluid {
-        width: 100%;
-        padding-right: 0;
-        padding-left: 0;
-        margin-right: auto;
-        margin-left: auto;
     }
 
     .horiz-gallery-strip,
@@ -83,17 +50,6 @@ import ProductCard from "./ProductCard.astro";
         will-change: transform;
         position: relative;
         justify-content: center;
-    }
-
-    .project-wrap {
-        width: 28vw;
-        padding: 2rem;
-        box-sizing: content-box;
-    }
-    .project-wrap img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
     }
 </style>
 
@@ -118,16 +74,12 @@ import ProductCard from "./ProductCard.astro";
             if (!section) return;
 
             const container = document.querySelector(".parallax-container");
-            // const secondRowCards = document.querySelectorAll(
-            //     ".second-row .product-card",
-            // );
-            // const allCards = document.querySelectorAll(".product-card");
 
             // --- Valores iniciales (progreso 0) ---
             gsap.set(container, {
                 rotateX: 30,
                 rotateZ: 20,
-                y: -500,
+                y: -550,
                 opacity: 0.1,
             });
 
@@ -143,7 +95,7 @@ import ProductCard from "./ProductCard.astro";
                 },
                 rotateX: 0,
                 rotateZ: 0,
-                y: 50,
+                y: 0,
                 opacity: 1,
                 ease: "none",
             });
@@ -176,8 +128,8 @@ import ProductCard from "./ProductCard.astro";
                     // markers: true,
                 },
                 // x: () => -horizontalScrollLength,
-                x: 700,
-                opacity: -1,
+                x: 800,
+                opacity: -0.5,
                 ease: "none",
             });
 
@@ -185,108 +137,3 @@ import ProductCard from "./ProductCard.astro";
         });
     }
 </script>
-
-<!-- <script>
-    import type { useI18n } from "@excalidraw/excalidraw";
-import gsap from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-    gsap.registerPlugin(ScrollTrigger);
-
-    window.addEventListener("load", () => {
-        const section = document.getElementById("Proyects");
-        if (!section) return;
-
-        const container = document.querySelector(".parallax-container");
-        const firstRowCards = document.querySelectorAll(
-            ".first-row .product-card",
-        );
-        const secondRowCards = document.querySelectorAll(
-            ".second-row .product-card",
-        );
-        const allCards = document.querySelectorAll(".product-card");
-
-        // --- Valores iniciales (progreso 0) ---
-        gsap.set(container, {
-            rotateX: 25,
-            rotateZ: 20,
-            y: -190, // Ajusta según prefieras (-190 o -590)
-            opacity: 0.2,
-        });
-
-        // Segunda fila comienza con translateX 150px, primera fila en 0
-        firstRowCards.forEach((card) => gsap.set(card, { "--x": "0px" }));
-        secondRowCards.forEach((card) => gsap.set(card, { "--x": "150px" }));
-
-        // --- ScrollTrigger que actualiza según el progreso ---
-        ScrollTrigger.create({
-            trigger: section,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1.5, // Suavizado ligado al scroll
-            onUpdate: (self) => {
-                const progress = self.progress; // 0 a 1
-
-                // Propiedades del contenedor (evolucionan en el rango [0, 0.2])
-                const rotateXVal = gsap.utils.mapRange(0, 0.2, 25, 0, progress);
-                const rotateZVal = gsap.utils.mapRange(0, 0.2, 20, 0, progress);
-                const translateYVal = gsap.utils.mapRange(
-                    0,
-                    0.2,
-                    -190,
-                    400,
-                    progress,
-                );
-                const opacityVal = gsap.utils.mapRange(
-                    0,
-                    0.2,
-                    0.2,
-                    1,
-                    progress,
-                );
-
-                gsap.set(container, {
-                    rotateX: rotateXVal,
-                    rotateZ: rotateZVal,
-                    y: translateYVal,
-                    opacity: opacityVal,
-                });
-
-                // Desplazamiento horizontal de las tarjetas (activo en [0.2, 1])
-                // mapRange devuelve el valor inicial (0 y 150) si progress < 0.2
-                const translateXVal = gsap.utils.mapRange(
-                    0.2,
-                    1,
-                    0,
-                    1000,
-                    progress,
-                );
-                const translateXReverseVal = gsap.utils.mapRange(
-                    0.2,
-                    1,
-                    150,
-                    -1000,
-                    progress,
-                );
-
-                firstRowCards.forEach((card) => {
-                    gsap.set(card, { "--x": translateXVal + "px" });
-                });
-
-                secondRowCards.forEach((card) => {
-                    gsap.set(card, { "--x": translateXReverseVal + "px" });
-                });
-            },
-        });
-
-
-
-        // Opcional: refrescar ScrollTrigger para cálculos precisos
-        ScrollTrigger.refresh();
-
-        // Limpieza (si el componente se desmonta)
-        return () => {
-            ScrollTrigger.getAll().forEach((st) => st.kill());
-        };
-    });
-</script> -->
