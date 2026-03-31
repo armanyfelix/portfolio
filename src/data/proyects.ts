@@ -1,11 +1,11 @@
-export interface Product {
+export interface Proyect {
 	title: string;
 	link: string;
 	thumbnail: string;
 	type: "mobile" | "desktop";
 }
 
-export const products: Product[] = [
+export const proyects: Proyect[] = [
 	{
 		title: "Felix Garages",
 		link: "https://felixgarages.netlify.app",

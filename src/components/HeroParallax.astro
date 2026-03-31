@@ -1,9 +1,6 @@
 ---
-import { products } from "../data/proyects";
+import { proyects } from "../data/proyects";
 import ProductCard from "./ProductCard.astro";
-
-const firstRow = products.slice(0, 3);
-const secondRow = products.slice(3, 6);
 ---
 
 <!-- <div class="parallax-container">
@@ -24,41 +21,34 @@ const secondRow = products.slice(3, 6);
     </div> -->
 <section
     id="proyects"
-    class="antialiased relative flex flex-col perspective-midrange transform-3d"
+    class="antialiased relative flex flex-col pb-96 xl:px-30 perspective-midrange transform-3d"
 >
     <div class="parallax-container flex flex-row space-x-10 mb-20">
         <div class="horiz-gallery-wrapper">
-            <div class="horiz-gallery-strip">
-                <button class="project-wrap hover:brightness-0">
-                    <img
-                        src="https://assets.codepen.io/16327/portrait-image-1.jpg"
-                        alt="1"
-                    />
-                </button>
-                <div class="project-wrap">
-                    <img
-                        src="https://assets.codepen.io/16327/portrait-image-2.jpg"
-                        alt="2"
-                    />
-                </div>
-                <div class="project-wrap">
-                    <img
-                        src="https://assets.codepen.io/16327/portrait-image-3.jpg"
-                        alt="3"
-                    />
-                </div>
-                <div class="project-wrap product-card">
-                    <img
-                        src="https://assets.codepen.io/16327/portrait-image-1.jpg"
-                        alt="1"
-                    />
-                </div>
-                <div class="project-wrap">
-                    <img
-                        src="https://assets.codepen.io/16327/portrait-image-2.jpg"
-                        alt="2"
-                    />
-                </div>
+            <div class="horiz-gallery-strip gap-9">
+                {
+                    proyects.map((p: any) => (
+                        <div
+                            class={`product-card ${p.type === "mobile" ? "w-36" : "w-[26vw]"} h-[21vw] box-content shrink-0 group`}
+                            data-product-title={p.title}
+                        >
+                            <a
+                                href={p.link}
+                                class="block group-hover:shadow-2xl h-full"
+                            >
+                                <img
+                                    src={p.thumbnail}
+                                    alt={p.title}
+                                    class="object-cover object-center  inset-0 h-full w-full"
+                                />
+                            </a>
+                            <div class="absolute inset-0 h-full w-full opacity-0 group-hover:opacity-80 bg-black pointer-events-none" />
+                            <h2 class="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 text-white">
+                                {p.title}
+                            </h2>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     </div>
@@ -137,8 +127,8 @@ const secondRow = products.slice(3, 6);
             gsap.set(container, {
                 rotateX: 30,
                 rotateZ: 20,
-                y: -600,
-                opacity: 0.05,
+                y: -500,
+                opacity: 0.1,
             });
 
             gsap.to(container, {
@@ -153,7 +143,7 @@ const secondRow = products.slice(3, 6);
                 },
                 rotateX: 0,
                 rotateZ: 0,
-                y: 0,
+                y: 50,
                 opacity: 1,
                 ease: "none",
             });
@@ -187,7 +177,7 @@ const secondRow = products.slice(3, 6);
                 },
                 // x: () => -horizontalScrollLength,
                 x: 700,
-                opacity: 0,
+                opacity: -1,
                 ease: "none",
             });
 
