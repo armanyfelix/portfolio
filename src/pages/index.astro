@@ -2,12 +2,11 @@
 import Contact from "@/components/Contact.astro";
 import Dotfiles from "@/components/Dotfiles.astro";
 import Experience from "@/components/Experience.astro";
-import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
 import HeroParallax from "../components/HeroParallax.astro";
 import Layout from "../layouts/Layout.astro";
-import MarqueeText from "@/components/MarqueeText.astro";
 import { TracingBeam } from "@/components/TracingBeam";
 import Hero from "@/components/Hero.astro";
+import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
 ---
 
 <Layout title="Armany Web Dev Portfolio">
@@ -18,7 +17,7 @@ import Hero from "@/components/Hero.astro";
             <TracingBeam client:load>
                 <div class="ml-18 mr-4 md:ml-48 md:mr-16">
                     <Experience />
-                    <!-- <WhatIUseBtw /> -->
+                    <WhatIUseBtw />
                     <Dotfiles />
                     <Contact />
                 </div>

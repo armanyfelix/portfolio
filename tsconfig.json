@@ -3,8 +3,8 @@
 	"include": [".astro/types.d.ts", "**/*", "./worker-configuration.d.ts"],
 	"exclude": ["dist"],
 	"compilerOptions": {
-		"strictNullChecks": false,
-		"allowJs": false,
+		"strictNullChecks": true,
+		"allowJs": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "react",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],

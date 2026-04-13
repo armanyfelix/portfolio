@@ -4,7 +4,7 @@ import { proyects } from "../data/proyects";
 
 <section
     id="proyects"
-    class="antialiased relative flex flex-col pb-96 perspective-midrange transform-3d"
+    class="antialiased flex flex-col pb-96 perspective-midrange transform-3d"
 >
     <div class="parallax-container flex flex-row space-x-10 mb-20">
         <div class="horiz-gallery-wrapper">
@@ -85,17 +85,17 @@ import { proyects } from "../data/proyects";
 
             gsap.to(container, {
                 scrollTrigger: {
-                    trigger: section, // La sección que activa la animación
-                    start: "top center", // Cuando el borde superior de la sección toca el borde inferior de la ventana (empieza a entrar)
-                    end: "top top", // Cuando el borde superior de la sección llega al borde superior de la ventana (entra completamente)
-                    scrub: true, // Suavizado con el scroll
+                    trigger: section,
+                    start: "top center",
+                    end: "top top",
+                    scrub: true,
                     // pin: true,
                     // anticipatePin: 1,
-                    // markers: true, // Activa para ver los puntos de inicio y fin (útil para depurar)
+                    // markers: true,
                 },
                 rotateX: 0,
                 rotateZ: 0,
-                y: 0,
+                y: 270,
                 opacity: 1,
                 ease: "none",
             });
@@ -108,11 +108,9 @@ import { proyects } from "../data/proyects";
             const pinWrap = sec.querySelector(".horiz-gallery-strip");
 
             let pinWrapWidth: any;
-            // let horizontalScrollLength: any;
 
             function refresh() {
                 pinWrapWidth = pinWrap.scrollWidth;
-                // horizontalScrollLength = pinWrapWidth - window.innerWidth;
             }
 
             refresh();
@@ -122,12 +120,11 @@ import { proyects } from "../data/proyects";
                     scrub: true,
                     trigger: sec,
                     pin: sec,
-                    start: "top top",
-                    end: () => `+=${pinWrapWidth}`,
+                    start: `top top-=${window.innerHeight * 0.25}`,
+                    end: () => `+=${pinWrapWidth + 100}`,
                     invalidateOnRefresh: true,
                     // markers: true,
                 },
-                // x: () => -horizontalScrollLength,
                 x: 800,
                 opacity: -0.5,
                 ease: "none",

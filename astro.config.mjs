@@ -17,9 +17,9 @@ export default defineConfig({
 		},
 	},
 	adapter: cloudflare({
-		platformProxy: {
-			enabled: true, // IMPORTANTE: Esto permite ver logs en dev
-		},
+		// platformProxy: {
+		// 	enabled: true, // IMPORTANTE: Esto permite ver logs en dev
+		// },
 		imageService: "compile",
 	}),
 	env: {

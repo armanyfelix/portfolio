@@ -1,9 +1,4 @@
-import {
-	AnimatePresence,
-	motion,
-	useMotionValueEvent,
-	useScroll,
-} from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { type Route, routes } from "@/data/routes";
 import type { Theme } from "@/types/themes";
@@ -11,27 +6,27 @@ import themes from "../data/themes.json";
 import { cn } from "../utils/cn";
 
 export default function Header({ className }: { className?: string }) {
-	const { scrollYProgress } = useScroll();
+	// const { scrollYProgress } = useScroll();
 	const [currentTheme, setCurrentTheme] = useState<string>("");
 	const [visible, setVisible] = useState<boolean>(true);
 	const [background, setBackground] = useState<string>("");
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
-	useMotionValueEvent(scrollYProgress, "change", (current) => {
-		if (typeof current === "number") {
-			const direction = current - scrollYProgress.getPrevious();
-			if (scrollYProgress.get() < 0.05) {
-				setVisible(true);
-				setBackground("bg-transparent shadow-none");
-			} else {
-				setBackground("bg-base-300/60 backdrop-blur shadow-xl");
-				if (direction < 0) {
-					setVisible(true);
-				} else {
-					setVisible(false);
-				}
-			}
-		}
-	});
+	// useMotionValueEvent(scrollYProgress, "change", (current) => {
+	//   if (typeof current === "number" && typeof scrollYProgress !== "undefined") {
+	//     const direction = current - scrollYProgress.getPrevious();
+	//     if (scrollYProgress?.get() < 0.05) {
+	//       setVisible(true);
+	//       setBackground("bg-transparent shadow-none");
+	//     } else {
+	//       setBackground("bg-base-300/60 backdrop-blur shadow-xl");
+	//       if (direction < 0) {
+	//         setVisible(true);
+	//       } else {
+	//         setVisible(false);
+	//       }
+	//     }
+	//   }
+	// });
 
 	const changeTheme = (theme: string) => {
 		localStorage.setItem("theme", theme);
@@ -203,11 +198,13 @@ export default function Header({ className }: { className?: string }) {
 										<div className="collapse-title font-semibold">{l.name}</div>
 										<div className="collapse-content text-sm">
 											<ul className="menu md:menu-lg lg:menu-xl bg-base-200 rounded-box m-2 min-h-[98dvh] shadow-2xl  w-52 md:w-60 lg:w-80 p-4">
-												{l.submenu.map((s: Route) => (
-													<li key={s.name}>
-														<a href={s.href}>{s.name}</a>
-													</li>
-												))}
+												{l.submenu
+													? l.submenu.map((s: Route) => (
+															<li key={s.name}>
+																<a href={s.href}>{s.name}</a>
+															</li>
+														))
+													: ""}
 											</ul>
 										</div>
 									</div>
