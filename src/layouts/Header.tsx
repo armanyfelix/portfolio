@@ -6,27 +6,10 @@ import themes from "../data/themes.json";
 import { cn } from "../utils/cn";
 
 export default function Header({ className }: { className?: string }) {
-	// const { scrollYProgress } = useScroll();
 	const [currentTheme, setCurrentTheme] = useState<string>("");
 	const [visible, setVisible] = useState<boolean>(true);
 	const [background, setBackground] = useState<string>("");
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
-	// useMotionValueEvent(scrollYProgress, "change", (current) => {
-	//   if (typeof current === "number" && typeof scrollYProgress !== "undefined") {
-	//     const direction = current - scrollYProgress.getPrevious();
-	//     if (scrollYProgress?.get() < 0.05) {
-	//       setVisible(true);
-	//       setBackground("bg-transparent shadow-none");
-	//     } else {
-	//       setBackground("bg-base-300/60 backdrop-blur shadow-xl");
-	//       if (direction < 0) {
-	//         setVisible(true);
-	//       } else {
-	//         setVisible(false);
-	//       }
-	//     }
-	//   }
-	// });
 
 	const changeTheme = (theme: string) => {
 		localStorage.setItem("theme", theme);
