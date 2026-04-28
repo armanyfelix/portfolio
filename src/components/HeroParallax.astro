@@ -2,7 +2,7 @@
 import { proyects } from "../data/proyects";
 ---
 
-<section
+<secti
     id="proyects"
     class="antialiased flex flex-col pb-96 perspective-midrange transform-3d"
 >
@@ -35,7 +35,7 @@ import { proyects } from "../data/proyects";
             </div>
         </div>
     </div>
-</section>
+</secti>
 
 <style is:global>
     .product-card {
@@ -59,7 +59,6 @@ import { proyects } from "../data/proyects";
     import ScrollSmoother from "gsap/ScrollSmoother";
 
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
     ScrollSmoother.create({
         wrapper: "#smooth-wrapper",
         content: "#smooth-content",
@@ -67,14 +66,11 @@ import { proyects } from "../data/proyects";
         normalizeScroll: true,
         ignoreMobileResize: true,
     });
-
     if (document.getElementById("proyects")) {
         window.addEventListener("load", () => {
             const section = document.getElementById("proyects");
             if (!section) return;
-
             const container = document.querySelector(".parallax-container");
-
             // --- Valores iniciales (progreso 0) ---
             gsap.set(container, {
                 rotateX: 30,
@@ -82,7 +78,6 @@ import { proyects } from "../data/proyects";
                 y: -550,
                 opacity: 0.1,
             });
-
             gsap.to(container, {
                 scrollTrigger: {
                     trigger: section,
@@ -103,16 +98,13 @@ import { proyects } from "../data/proyects";
 
         //Horizontal Scroll Galleries
         const horizontalSections = gsap.utils.toArray(".horiz-gallery-wrapper");
-
         horizontalSections.forEach(function (sec: any, i) {
             const pinWrap = sec.querySelector(".horiz-gallery-strip");
-
             let pinWrapWidth: any;
 
             function refresh() {
                 pinWrapWidth = pinWrap.scrollWidth;
             }
-
             refresh();
             // Pinning and horizontal scrolling
             gsap.to(pinWrap, {
@@ -129,7 +121,6 @@ import { proyects } from "../data/proyects";
                 opacity: -0.5,
                 ease: "none",
             });
-
             ScrollTrigger.addEventListener("refreshInit", refresh);
         });
     }

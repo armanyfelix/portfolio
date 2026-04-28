@@ -22,12 +22,13 @@ const { title } = Astro.props;
         <ClientRouter />
     </head>
     <body class="from-primary/10 via-base-100 to-secondary/15 bg-linear-to-b">
-        <div class="z-50 min-h-dvhgridgrid-rows-[auto_1fr_auto]">
-            <Header client:load />
-            <main class="overflow-hidden">
-                <slot />
-            </main>
-            <!-- <Footer /> -->
-        </div>
+        <!-- <div class="z-50 min-h-dvhgridgrid-rows-[auto_1fr_auto]"> -->
+        <Header client:load />
+        <main class="oerflow-hidden">
+            <slot />
+        </main>
+        <div class="bg-yellow-500 p-30 w-full">por favorrororororo</div>
+        <!-- </div> -->
+        <!-- <Footer /> -->
     </body>
 </html>

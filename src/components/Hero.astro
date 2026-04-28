@@ -26,3 +26,152 @@
         </p>
     </div>
 </div>
+
+<script>
+    import gsap from "gsap";
+    import ScrollTrigger from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+    let cleanupFn: (() => void) | null = null;
+    const initAboutSection = () => {
+        if (cleanupFn) {
+            cleanupFn();
+            cleanupFn = null;
+        }
+        const section = document.querySelector<HTMLElement>("#about-section");
+        if (!section) return;
+        const title = section.querySelector<HTMLElement>(".about-title");
+        const desc = section.querySelector<HTMLElement>(".about-desc");
+        const btn = section.querySelector<HTMLElement>(".about-btn");
+
+        const resetElement = (element: HTMLElement | null) => {
+            if (!element) return;
+            const original = element.dataset.splitOriginal;
+            if (original) {
+                element.textContent = original;
+                delete element.dataset.splitOriginal;
+            }
+            gsap.set(element, { clearProps: "all" });
+            element.style.visibility = "hidden";
+        };
+
+        resetElement(title);
+        resetElement(desc);
+
+        const splitIntoWords = (element: HTMLElement): HTMLElement[] => {
+            const text = (element.textContent ?? "").trim();
+            element.dataset.splitOriginal = text;
+            element.textContent = "";
+            const fragment = document.createDocumentFragment();
+            const words = text.split(/(\s+)/).filter(Boolean);
+            const spans: HTMLElement[] = [];
+
+            for (const word of words) {
+                if (/^\s+$/.test(word)) {
+                    fragment.append(document.createTextNode(word));
+                    continue;
+                }
+
+                const span = document.createElement("span");
+                span.className = "split-word inline-block";
+                span.textContent = word;
+                fragment.append(span);
+                spans.push(span);
+            }
+
+            element.append(fragment);
+            return spans;
+        };
+
+        const restoreSplit = (element: HTMLElement): void => {
+            const original = element.dataset.splitOriginal;
+            if (original == null) return;
+            element.textContent = original;
+            delete element.dataset.splitOriginal;
+        };
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            const revertFns: Array<() => void> = [];
+            const ctx = gsap.context(() => {
+                if (title) {
+                    splitIntoWords(title);
+                    revertFns.push(() => restoreSplit(title));
+                }
+                if (desc) {
+                    splitIntoWords(desc);
+                    revertFns.push(() => restoreSplit(desc));
+                }
+                const tl = gsap.timeline({
+                    defaults: { ease: "power3.out" },
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                    },
+                });
+                if (title) {
+                    gsap.set(title, { visibility: "visible" });
+                    tl.from(
+                        title.querySelectorAll<HTMLElement>(".split-word"),
+                        {
+                            yPercent: 120,
+                            autoAlpha: 0,
+                            duration: 1.1,
+                            stagger: 0.04,
+                        },
+                    );
+                }
+                if (desc) {
+                    gsap.set(desc, { visibility: "visible" });
+                    tl.from(
+                        desc.querySelectorAll<HTMLElement>(".split-word"),
+                        {
+                            y: 28,
+                            autoAlpha: 0,
+                            duration: 0.8,
+                            stagger: 0.015,
+                        },
+                        "-=0.55",
+                    );
+                }
+                if (btn) {
+                    gsap.set(btn, { visibility: "visible" });
+                    tl.from(
+                        btn,
+                        {
+                            y: 28,
+                            autoAlpha: 0,
+                            duration: 0.8,
+                        },
+                        "-=0.65",
+                    );
+                }
+            }, section);
+
+            cleanupFn = () => {
+                ctx.revert();
+                for (const fn of revertFns) fn();
+
+                if (title) {
+                    gsap.set(title, { clearProps: "all" });
+                    title.style.visibility = "";
+                }
+                if (desc) {
+                    gsap.set(desc, { clearProps: "all" });
+                    desc.style.visibility = "";
+                }
+                if (btn) {
+                    gsap.set(btn, { clearProps: "all" });
+                    btn.style.visibility = "";
+                }
+            };
+        } else {
+            if (title) title.style.visibility = "visible";
+            if (desc) desc.style.visibility = "visible";
+            if (btn) btn.style.visibility = "visible";
+        }
+    };
+
+    initAboutSection();
+    document.addEventListener("astro:page-load", initAboutSection);
+</script>
