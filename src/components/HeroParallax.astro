@@ -2,7 +2,7 @@
 import { proyects } from "../data/proyects";
 ---
 
-<secti
+<section
     id="proyects"
     class="antialiased flex flex-col pb-96 perspective-midrange transform-3d"
 >
@@ -35,7 +35,7 @@ import { proyects } from "../data/proyects";
             </div>
         </div>
     </div>
-</secti>
+</section>
 
 <style is:global>
     .product-card {
@@ -64,7 +64,7 @@ import { proyects } from "../data/proyects";
         content: "#smooth-content",
         smooth: 2,
         normalizeScroll: true,
-        ignoreMobileResize: true,
+        // ignoreMobileResize: true,
     });
     if (document.getElementById("proyects")) {
         window.addEventListener("load", () => {
@@ -97,8 +97,10 @@ import { proyects } from "../data/proyects";
         });
 
         //Horizontal Scroll Galleries
-        const horizontalSections = gsap.utils.toArray(".horiz-gallery-wrapper");
-        horizontalSections.forEach(function (sec: any, i) {
+        const horizontalSections: any = gsap.utils.toArray(
+            ".horiz-gallery-wrapper",
+        );
+        horizontalSections.forEach(function (sec: any, i: number) {
             const pinWrap = sec.querySelector(".horiz-gallery-strip");
             let pinWrapWidth: any;
 

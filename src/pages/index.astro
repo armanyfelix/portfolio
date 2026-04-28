@@ -6,13 +6,14 @@ import Contact from "@/components/Contact.astro";
 import Layout from "../layouts/Layout.astro";
 import { TracingBeam } from "@/components/TracingBeam";
 import Hero from "@/components/Hero.astro";
-import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
 import Footer from "@/layouts/Footer.astro";
+// import WhatIUseBtw from "@/components/WhatIUseBtw.astro";
+// import Footer from "@/layouts/Footer.astro";
 ---
 
 <Layout title="Armany Web Dev Portfolio">
     <div id="smooth-wrapper">
-        <div id="smooth-content">
+        <div id="smooth-content" class="pb-40">
             <Hero />
             <HeroParallax />
             <TracingBeam client:load>
@@ -23,6 +24,7 @@ import Footer from "@/layouts/Footer.astro";
                     <Contact />
                 </div>
             </TracingBeam>
+            <Footer />
         </div>
     </div>
 </Layout>
