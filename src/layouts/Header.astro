@@ -86,13 +86,17 @@ let menuOpen = false;
                                     type="button"
                                     popovertarget="popover-1"
                                     style="anchor-name:--anchor-1"
-                                    class="btn btn-lg btn-ghost btn-square text-xl"
+                                    class="btn btn-lg btn-ghost btn-square text-xl align-middle inine-block"
                                 >
-                                    <span id="theme-emoji"></span>
+                                    <span
+                                        id="theme-emoji"
+                                        class="align-middle inine-block"
+                                    >
+                                    </span>
                                     <svg
                                         width="12px"
                                         height="12px"
-                                        class="inline-block h-2 w-2 fill-current opacity-60"
+                                        class="align-middle inine-block ml-6 h-2 w-2 fill-current opacity-60"
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 2048 2048"
                                     >
@@ -115,7 +119,7 @@ let menuOpen = false;
                                             >
                                                 <label
                                                     for={`theme-${t.name}`}
-                                                    class="theme-controller"
+                                                    class="w-full flex items-center justify-between"
                                                 >
                                                     <input
                                                         type="radio"
@@ -126,7 +130,7 @@ let menuOpen = false;
                                                         value={t.name}
                                                     />
                                                     <div class="text-nowrap">
-                                                        {t.emoji} {t.name}
+                                                        {t.name}
                                                     </div>
                                                     <div class="inline-flex items-center flex-nowrap space-x-1">
                                                         <div class="w-3 h-3 bg-primary rounded-full" />
@@ -281,12 +285,14 @@ let menuOpen = false;
             <script>
                 import themes from "../data/themes.json";
 
-                const currentTheme = localStorage.getItem("theme");
+                const currentTheme = localStorage.removeItem("theme");
                 const themeEmoji = document.getElementById("theme-emoji");
+                const themeRadios = document.querySelectorAll(
+                    'input[name="theme-buttons"]',
+                );
 
                 const setTheme = (theme: string) => {
                     document.documentElement.setAttribute("data-theme", theme);
-                    console.log(theme);
                     if (themeEmoji) {
                         themeEmoji.innerHTML =
                             themes.find((t) => t.name === theme)?.emoji || "";
@@ -307,10 +313,6 @@ let menuOpen = false;
                         setTheme(currentTheme);
                     }
                 }
-
-                const themeRadios = document.querySelectorAll(
-                    'input[name="theme-buttons"]',
-                );
 
                 function handleThemeChange(event: any) {
                     const selectedTheme = event.target.value;

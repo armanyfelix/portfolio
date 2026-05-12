@@ -16,6 +16,13 @@ const { title } = Astro.props;
         <meta name="description" content="Astro description" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <script
+            src="https://cdn.jsdelivr.net/npm/emojione@4.0.0/lib/js/emojione.min.js"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/emojione@4.0.0/extras/css/emojione.min.css"
+        />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
         <ClientRouter />
