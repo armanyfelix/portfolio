@@ -74,25 +74,21 @@ let menuOpen = false;
                             <a
                                 href="/"
                                 id="nav-logo"
-                                class="text-primary-content font-boldonse origin-left text-xl font-bold flex items-center tracking-wide uppercase md:text-5xl lg:text-4xl xl:text-5xl"
+                                class="text-primary-content font-boldonse transform origin-center text-xl font-bold flex items-center tracking-wide uppercase md:text-3xl lg:text-4xl xl:text-5xl"
                                 style="will-change: transform;"
                             >
                                 Armany felix
                             </a>
                         </div>
                         <div class="navbar-end">
-                            <div class="dropdown dropdown-end">
+                            <div class="dropdowndropdown-end">
                                 <button
                                     type="button"
-                                    tab-index={0}
+                                    popovertarget="popover-1"
+                                    style="anchor-name:--anchor-1"
                                     class="btn btn-lg btn-ghost btn-square text-xl"
                                 >
-                                    <!-- {
-                                        themes.find(
-                                            (t) => t.name === currentTheme,
-                                        )?.emoji || "🎨"
-                                    } -->
-                                    theme
+                                    <span id="theme-emoji"></span>
                                     <svg
                                         width="12px"
                                         height="12px"
@@ -106,14 +102,16 @@ let menuOpen = false;
                                     </svg>
                                 </button>
                                 <ul
-                                    tab-index={-1}
-                                    class="menu dropdown-content bg-base-300 max-h-[70dvh] overflow-auto flex-nowrap gap-y-2 rounded-box z-1 mt-4 w-60 p-2 shadow-2xl"
+                                    popover
+                                    id="popover-1"
+                                    style="position-anchor:--anchor-1"
+                                    class="menu dropdown dropdown-end bg-base-300 h-[70dvh] max-h-[70dvh] overflow-scroll flex-nowrap rounded-box w-70 px-3 shadow-2xl"
                                 >
                                     {
                                         themes.map((t: Theme) => (
                                             <li
                                                 data-theme={t.name}
-                                                class="antialiased rounded-field"
+                                                class="antialiased rounded-field my-2"
                                             >
                                                 <label
                                                     for={`theme-${t.name}`}
@@ -123,7 +121,7 @@ let menuOpen = false;
                                                         type="radio"
                                                         name="theme-buttons"
                                                         id={`theme-${t.name}`}
-                                                        class={`theme-controller sr-oly`}
+                                                        class={`theme-controller sr-only`}
                                                         aria-label={t.name}
                                                         value={t.name}
                                                     />
@@ -281,55 +279,49 @@ let menuOpen = false;
             </script>
 
             <script>
-                const theme = localStorage.getItem("theme");
-                console.log(theme);
-                if (!theme) {
-                    // if (
-                    //     window.matchMedia("(prefers-color-scheme: dark)")
-                    //         ?.matches
-                    // ) {
-                    //     setCurrentTheme("dark");
-                    // } else {
-                    //     setCurrentTheme("light");
-                    // }
-                } else {
-                    // setCurrentTheme(theme);
+                import themes from "../data/themes.json";
+
+                const currentTheme = localStorage.getItem("theme");
+                const themeEmoji = document.getElementById("theme-emoji");
+
+                const setTheme = (theme: string) => {
                     document.documentElement.setAttribute("data-theme", theme);
+                    console.log(theme);
+                    if (themeEmoji) {
+                        themeEmoji.innerHTML =
+                            themes.find((t) => t.name === theme)?.emoji || "";
+                    }
+                };
+
+                if (themeEmoji) {
+                    if (!currentTheme) {
+                        if (
+                            window.matchMedia("(prefers-color-scheme: dark)")
+                                ?.matches
+                        ) {
+                            themeEmoji.innerHTML = "🌙";
+                        } else {
+                            themeEmoji.innerHTML = "☀️";
+                        }
+                    } else {
+                        setTheme(currentTheme);
+                    }
                 }
-                window
-                    .matchMedia("(prefers-color-scheme: dark)")
-                    .addEventListener("change", (event) => {
-                        const newTheme = event.matches ? "dark" : "light";
-                        localStorage.setItem("theme", newTheme);
-                        // setCurrentTheme(newTheme);
-                        document.documentElement.setAttribute(
-                            "data-theme",
-                            newTheme,
-                        );
-                    });
 
                 const themeRadios = document.querySelectorAll(
                     'input[name="theme-buttons"]',
                 );
 
-                // Define the event handler function
                 function handleThemeChange(event: any) {
-                    const selectedTheme = event.target.value; // Get the selected value
-                    console.log("Selected theme:", selectedTheme);
+                    const selectedTheme = event.target.value;
 
-                    // Example: Apply the theme (e.g., update CSS class)
-                    document.body.dataset.theme = selectedTheme;
-
-                    // Example: Save to localStorage
-                    localStorage.setItem("preferredTheme", selectedTheme);
+                    setTheme(selectedTheme);
+                    localStorage.setItem("theme", selectedTheme);
                 }
 
-                // Attach the "change" event listener to each radio button
                 themeRadios.forEach((radio) => {
                     radio.addEventListener("change", handleThemeChange);
                 });
-
-                console.log(themeRadios);
             </script>
         </div>
     </div>
