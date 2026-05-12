@@ -9,6 +9,8 @@ import Menu from "./Menu.astro";
 // import { t } from "@/lib/utils";
 
 const currentPath = Astro.url.pathname;
+
+let menuOpen = false;
 ---
 
 <header
@@ -23,12 +25,21 @@ const currentPath = Astro.url.pathname;
             id="nav-container"
             class="relative mx-auto flex w-full items-center justify-between px-4 py-5 transition-all duration-500 md:px-6 lg:px-8 lg:py-8"
         >
-            <div class="drawer">
-                <input id="menu-drawer" type="checkbox" class="drawer-toggle" />
+            <div class="drawer drawer-end">
+                <input
+                    id="menu-drawer"
+                    type="checkbox"
+                    class="drawer-toggle"
+                    onclick={"() => { menuOpen = !menuOpen;}"}
+                />
                 <div class="drawer-content">
                     <div class={"navbar"}>
                         <div class="navbar-start">
-                            <label for="menu-drawer">
+                            <label
+                                for="menu-drawer"
+                                class={`${menuOpen && "swap-active"} btn btn-square btn-ghost drawer-button swap swap-rotate`}
+                            >
+                                <input type="checkbox" />
                                 <svg
                                     class="swap-off fill-current"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +56,6 @@ const currentPath = Astro.url.pathname;
                                         stroke-width="2"
                                         d="M4 6h16M4 12h16M4 18h7"></path>
                                 </svg>
-                                {/* close icon */}
                                 <svg
                                     class="swap-on fill-current"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -108,9 +118,8 @@ const currentPath = Astro.url.pathname;
                 }
                 <a href={"/"} class="lg:px-8 lg:py-3"> home </a>
             </nav> -->
-
-                    <Menu />
                 </div>
+                <Menu />
             </div>
 
             <script>
