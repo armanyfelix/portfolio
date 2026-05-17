@@ -15,12 +15,9 @@ let menuOpen = false;
 
 <header
     id="navbar"
-    class="fixed top-2 left-0 z-50 w-full px-3 duration-500 md:top-3"
+    class="fixed top-3 left-0 z-50 w-full px-3 duration-500 md:top-3"
 >
-    <div
-        id="nav-wrapper"
-        class="mx-auto max-w-full transition-all duration-500"
-    >
+    <div id="nav-wrapper" class="mx-auto max-w-6xl transition-all duration-500">
         <div
             id="nav-container"
             class="relative mx-auto flex w-full items-center justify-between px-4 py-5 transition-all duration-500 md:px-6 lg:px-8 lg:py-8"
@@ -74,7 +71,7 @@ let menuOpen = false;
                             <a
                                 href="/"
                                 id="nav-logo"
-                                class="text-primary-content font-boldonse transform origin-center text-xl font-bold flex items-center tracking-wide uppercase md:text-3xl lg:text-4xl xl:text-5xl"
+                                class="text-primary-content font-boldonse transform origin-center text-xl font-bold flex items-center tracking-wide uppercase md:text-3xl lg:text-4xl xl:text-4xl"
                                 style="will-change: transform;"
                             >
                                 Armany felix
@@ -93,7 +90,7 @@ let menuOpen = false;
                                         class="align-middle inine-block"
                                     >
                                     </span>
-                                    <svg
+                                    <!-- <svg
                                         width="12px"
                                         height="12px"
                                         class="align-middle inine-block ml-6 h-2 w-2 fill-current opacity-60"
@@ -103,7 +100,7 @@ let menuOpen = false;
                                         <path
                                             d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"
                                         ></path>
-                                    </svg>
+                                    </svg> -->
                                 </button>
                                 <ul
                                     popover
@@ -201,8 +198,8 @@ let menuOpen = false;
                         });
 
                         gsap.to(navContainer, {
-                            paddingTop: "0.75rem",
-                            paddingBottom: "0.75rem",
+                            paddingTop: "0.035rem",
+                            paddingBottom: "0.035rem",
                             duration: 0.5,
                             ease: "power2.out",
                         });
@@ -268,11 +265,13 @@ let menuOpen = false;
                             "rounded-2xl",
                             "border",
                             "border-muted-light/20",
+                            "max-w-6xl",
+                            "w-6xl",
                         );
                         gsap.set(navWrapper, { maxWidth: "96rem" });
                         gsap.set(navContainer, {
-                            paddingTop: "0.75rem",
-                            paddingBottom: "0.75rem",
+                            paddingTop: "0.025rem",
+                            paddingBottom: "0.025rem",
                         });
                         gsap.set(logo, {
                             scale: 0.65,
@@ -285,7 +284,7 @@ let menuOpen = false;
             <script>
                 import themes from "../data/themes.json";
 
-                const currentTheme = localStorage.removeItem("theme");
+                const currentTheme = localStorage.getItem("theme");
                 const themeEmoji = document.getElementById("theme-emoji");
                 const themeRadios = document.querySelectorAll(
                     'input[name="theme-buttons"]',

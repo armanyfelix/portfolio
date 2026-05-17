@@ -1,0 +1,145 @@
+---
+// Genera IDs únicos para cada instancia del componente
+const uniqueId = `tracing-${Math.random().toString(36).slice(2, 11)}`;
+const containerId = `${uniqueId}-container`;
+const contentId = `${uniqueId}-content`;
+const svgId = `${uniqueId}-svg`;
+const gradientId = `${uniqueId}-gradient`;
+---
+
+<div id={containerId} class="relative w-full">
+    <div class="absolute left-1 md:left-16 top-40">
+        <!-- Punto con transiciones CSS -->
+        <div
+            class="tracing-dot ml-6.5 h-4 w-4 loading loading-ring duration-1000 loading-sm"
+            style="box-shadow: rgba(0,0,0,0.34) 0px 3px 8px; transition: box-shadow 0.2s 0.5s"
+        >
+            <div
+                class="tracing-dot-inner h-2 w-2 rounded-full border border-neutral-300"
+                style="background-color: var(--emerald-500); border-color: var(--emerald-600); transition: background-color 0.2s 0.5s, border-color 0.2s 0.5s"
+            >
+            </div>
+        </div>
+
+        <svg
+            id={svgId}
+            viewBox="0 0 20 800"
+            width="20"
+            height="800"
+            class="ml-4 block"
+            aria-hidden="true"
+        >
+            <path fill="none" stroke="#9091A0" stroke-opacity="0.16"></path>
+            <path
+                fill="none"
+                stroke="url(#gradient)"
+                stroke-width="2.25"
+                class="motion-reduce:hidden"></path>
+            <defs>
+                <linearGradient
+                    id={gradientId}
+                    gradientUnits="userSpaceOnUse"
+                    x1="0"
+                    x2="0"
+                    y1="0"
+                    y2="0"
+                >
+                    <stop stop-color="var(--color-primary)" stop-opacity="0"
+                    ></stop>
+                    <stop stop-color="var(--color-primary)"></stop>
+                    <stop offset="0.325" stop-color="var(--color-secondary)"
+                    ></stop>
+                    <stop
+                        offset="1"
+                        stop-color="var(--color-accent)"
+                        stop-opacity="0"></stop>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Contenido dinámico -->
+    <div id={contentId}>
+        <slot />
+    </div>
+</div>
+
+<!-- Script con GSAP y ScrollTrigger -->
+<script define:vars={{ containerId, contentId, svgId, gradientId }}>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initBeam() {
+        const container = document.getElementById(containerId);
+        const content = document.getElementById(contentId);
+        const svg = document.getElementById(svgId);
+        const gradient = document.getElementById(gradientId);
+        if (!container || !content || !svg || !gradient) return;
+
+        // 1. Medir altura del contenido y actualizar SVG
+        const contentHeight = content.offsetHeight;
+        svg.setAttribute("height", contentHeight);
+        svg.setAttribute("viewBox", `0 0 20 ${contentHeight + 800}`);
+
+        const pathD = `M 1 0V -36 l 18 24 V ${contentHeight * 0.8} l -18 24V ${contentHeight}`;
+        svg.querySelectorAll("path").forEach((p) => p.setAttribute("d", pathD));
+
+        // 2. Cambio de estilos del punto al hacer scroll (clase is-scrolled)
+        ScrollTrigger.create({
+            trigger: container,
+            start: "top top",
+            end: "bottom top",
+            toggleClass: { targets: container, className: "is-scrolled" },
+        });
+
+        // 3. Línea del gradiente animada con suavizado (scrub simula el spring)
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.5, // inercia similar a un spring
+            },
+        });
+
+        // y1 llega a contentHeight en el 80% del scroll
+        tl.to(
+            gradient,
+            {
+                attr: { y1: contentHeight },
+                duration: 0.8,
+                ease: "none",
+            },
+            0,
+        );
+
+        // y2 llega a contentHeight - 200 en el 100% del scroll
+        tl.to(
+            gradient,
+            {
+                attr: { y2: contentHeight - 200 },
+                duration: 1,
+                ease: "none",
+            },
+            0,
+        );
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.readyState === "loading"
+        ? document.addEventListener("DOMContentLoaded", initBeam)
+        : initBeam();
+</script>
+
+<!-- Estilos para el estado "scrolled" -->
+<style is:global>
+    .is-scrolled .tracing-dot {
+        box-shadow: none !important;
+    }
+    .is-scrolled .tracing-dot-inner {
+        background-color: white !important;
+        border-color: white !important;
+    }
+</style>
