@@ -34,11 +34,11 @@ let menuOpen = false;
                         <div class="navbar-start">
                             <label
                                 for="menu-drawer"
-                                class={`${menuOpen && "swap-active"} btn btn-lg btn-square btn-ghost drawer-button swap swap-rotate`}
+                                class={`${menuOpen && "swap-active"} btn btn-lg btn-square text-primary-conten btn-ghost drawer-button swap swap-rotate`}
                             >
                                 <input type="checkbox" />
                                 <svg
-                                    class="swap-off fill-current"
+                                    class="swap-off fill-primary-content"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width={28}
                                     height={28}
@@ -54,7 +54,7 @@ let menuOpen = false;
                                         d="M4 6h16M4 12h16M4 18h7"></path>
                                 </svg>
                                 <svg
-                                    class="swap-on fill-current"
+                                    class="swap-on fill-primary-conten"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width={24}
                                     height={24}
@@ -167,163 +167,158 @@ let menuOpen = false;
                 </div>
                 <Menu />
             </div>
-
-            <script>
-                import gsap from "gsap";
-
-                const navbar = document.getElementById("navbar");
-                const navWrapper = document.getElementById("nav-wrapper");
-                const navContainer = document.getElementById("nav-container");
-                const logo = document.getElementById("nav-logo");
-
-                let isScrolled = false;
-                let scrollTween: gsap.core.Tween | null = null;
-
-                if (navbar && navWrapper && navContainer && logo) {
-                    const animateToScrolled = () => {
-                        if (scrollTween) scrollTween.kill();
-
-                        navWrapper.classList.add(
-                            "bg-primary",
-                            "shadow-lg",
-                            "rounded-box",
-                            "border",
-                            "border-muted-light/20",
-                        );
-
-                        gsap.to(navWrapper, {
-                            maxWidth: "96rem",
-                            duration: 0.5,
-                            ease: "power2.out",
-                        });
-
-                        gsap.to(navContainer, {
-                            paddingTop: "0.035rem",
-                            paddingBottom: "0.035rem",
-                            duration: 0.5,
-                            ease: "power2.out",
-                        });
-
-                        scrollTween = gsap.to(logo, {
-                            scale: 0.65,
-                            duration: 0.5,
-                            ease: "power2.out",
-                            transformOrigin: "left center",
-                        });
-                    };
-
-                    const animateToInitial = () => {
-                        if (scrollTween) scrollTween.kill();
-
-                        navWrapper.classList.remove(
-                            "bg-primary",
-                            "shadow-lg",
-                            "rounded-box",
-                            "border",
-                            "border-muted-light/20",
-                        );
-
-                        gsap.to(navWrapper, {
-                            maxWidth: "100%",
-                            duration: 0.5,
-                            ease: "power2.out",
-                        });
-
-                        gsap.to(navContainer, {
-                            paddingTop:
-                                window.innerWidth >= 1024 ? "2rem" : "1.25rem",
-                            paddingBottom:
-                                window.innerWidth >= 1024 ? "2rem" : "1.25rem",
-                            duration: 0.5,
-                            ease: "power2.out",
-                        });
-
-                        scrollTween = gsap.to(logo, {
-                            scale: 1,
-                            duration: 0.5,
-                            ease: "power2.out",
-                            transformOrigin: "left center",
-                        });
-                    };
-
-                    window.addEventListener("scroll", () => {
-                        const shouldBeScrolled = window.scrollY > 50;
-                        if (shouldBeScrolled && !isScrolled) {
-                            isScrolled = true;
-                            animateToScrolled();
-                        } else if (!shouldBeScrolled && isScrolled) {
-                            isScrolled = false;
-                            animateToInitial();
-                        }
-                    });
-
-                    if (window.scrollY > 50) {
-                        isScrolled = true;
-                        navWrapper.classList.add(
-                            "bg-secondary",
-                            "shadow-lg",
-                            "rounded-2xl",
-                            "border",
-                            "border-muted-light/20",
-                            "max-w-6xl",
-                            "w-6xl",
-                        );
-                        gsap.set(navWrapper, { maxWidth: "96rem" });
-                        gsap.set(navContainer, {
-                            paddingTop: "0.025rem",
-                            paddingBottom: "0.025rem",
-                        });
-                        gsap.set(logo, {
-                            scale: 0.65,
-                            transformOrigin: "left center",
-                        });
-                    }
-                }
-            </script>
-
-            <script>
-                import themes from "../data/themes.json";
-
-                const currentTheme = localStorage.getItem("theme");
-                const themeEmoji = document.getElementById("theme-emoji");
-                const themeRadios = document.querySelectorAll(
-                    'input[name="theme-buttons"]',
-                );
-
-                const setTheme = (theme: string) => {
-                    document.documentElement.setAttribute("data-theme", theme);
-                    if (themeEmoji) {
-                        themeEmoji.innerHTML =
-                            themes.find((t) => t.name === theme)?.emoji || "";
-                    }
-                };
-
-                if (themeEmoji) {
-                    if (!currentTheme) {
-                        if (
-                            window.matchMedia("(prefers-color-scheme: dark)")
-                                ?.matches
-                        ) {
-                            themeEmoji.innerHTML = "🌙";
-                        } else {
-                            themeEmoji.innerHTML = "☀️";
-                        }
-                    } else {
-                        setTheme(currentTheme);
-                    }
-                }
-
-                function handleThemeChange(event: any) {
-                    const selectedTheme = event.target.value;
-
-                    setTheme(selectedTheme);
-                    localStorage.setItem("theme", selectedTheme);
-                }
-
-                themeRadios.forEach((radio) => {
-                    radio.addEventListener("change", handleThemeChange);
-                });
-            </script>
         </div>
     </div>
 </header>
+
+<script>
+    import gsap from "gsap";
+
+    const navbar = document.getElementById("navbar");
+    const navWrapper = document.getElementById("nav-wrapper");
+    const navContainer = document.getElementById("nav-container");
+    const logo = document.getElementById("nav-logo");
+
+    let isScrolled = false;
+    let scrollTween: gsap.core.Tween | null = null;
+
+    if (navbar && navWrapper && navContainer && logo) {
+        const animateToScrolled = () => {
+            if (scrollTween) scrollTween.kill();
+
+            navWrapper.classList.add(
+                "bg-primary/60",
+                "shadow-lg",
+                "backdrop-blur",
+                "rounded-box",
+                "border",
+                "border-primary-content/50",
+            );
+
+            gsap.to(navWrapper, {
+                maxWidth: "96rem",
+                duration: 0.5,
+                ease: "power2.out",
+            });
+
+            gsap.to(navContainer, {
+                paddingTop: "0.035rem",
+                paddingBottom: "0.035rem",
+                duration: 0.5,
+                ease: "power2.out",
+            });
+
+            scrollTween = gsap.to(logo, {
+                scale: 0.65,
+                duration: 0.5,
+                ease: "power2.out",
+                transformOrigin: "left center",
+            });
+        };
+
+        const animateToInitial = () => {
+            if (scrollTween) scrollTween.kill();
+
+            navWrapper.classList.remove(
+                "bg-primary/60",
+                "backdrop-blur",
+                "shadow-lg",
+                "rounded-box",
+                "border",
+                "border-base-content/10",
+            );
+
+            gsap.to(navWrapper, {
+                // maxWidth: "100%",
+                duration: 0.5,
+                ease: "power2.out",
+            });
+
+            gsap.to(navContainer, {
+                paddingTop: window.innerWidth >= 1024 ? "2rem" : "1.25rem",
+                paddingBottom: window.innerWidth >= 1024 ? "2rem" : "1.25rem",
+                duration: 0.5,
+                ease: "power2.out",
+            });
+
+            scrollTween = gsap.to(logo, {
+                scale: 1,
+                duration: 0.5,
+                ease: "power2.out",
+                transformOrigin: "left center",
+            });
+        };
+
+        window.addEventListener("scroll", () => {
+            const shouldBeScrolled = window.scrollY > 50;
+            if (shouldBeScrolled && !isScrolled) {
+                isScrolled = true;
+                animateToScrolled();
+            } else if (!shouldBeScrolled && isScrolled) {
+                isScrolled = false;
+                animateToInitial();
+            }
+        });
+
+        if (window.scrollY > 50) {
+            isScrolled = true;
+            navWrapper.classList.add(
+                "bg-secondary",
+                "shadow-lg",
+                "rounded-2xl",
+                "border",
+                "border-base-content/10",
+            );
+            gsap.set(navWrapper, { maxWidth: "96rem" });
+            gsap.set(navContainer, {
+                paddingTop: "0.025rem",
+                paddingBottom: "0.025rem",
+            });
+            gsap.set(logo, {
+                scale: 0.65,
+                transformOrigin: "left center",
+            });
+        }
+    }
+</script>
+
+<script>
+    import themes from "../data/themes.json";
+
+    const currentTheme = localStorage.getItem("theme");
+    const themeEmoji = document.getElementById("theme-emoji");
+    const themeRadios = document.querySelectorAll(
+        'input[name="theme-buttons"]',
+    );
+
+    const setTheme = (theme: string) => {
+        document.documentElement.setAttribute("data-theme", theme);
+        if (themeEmoji) {
+            themeEmoji.innerHTML =
+                themes.find((t) => t.name === theme)?.emoji || "";
+        }
+    };
+
+    if (themeEmoji) {
+        if (!currentTheme) {
+            if (window.matchMedia("(prefers-color-scheme: dark)")?.matches) {
+                themeEmoji.innerHTML = "🌙";
+            } else {
+                themeEmoji.innerHTML = "☀️";
+            }
+        } else {
+            setTheme(currentTheme);
+        }
+    }
+
+    function handleThemeChange(event: any) {
+        const selectedTheme = event.target.value;
+
+        setTheme(selectedTheme);
+        localStorage.setItem("theme", selectedTheme);
+    }
+
+    themeRadios.forEach((radio) => {
+        radio.addEventListener("change", handleThemeChange);
+    });
+</script>
