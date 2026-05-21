@@ -6,13 +6,15 @@ import { proyects } from "../data/proyects";
     id="proyects"
     class="antialiased flex flex-col pb-96 perspective-midrange transform-3d"
 >
-    <div class="parallax-container flex flex-row space-x-10 mb-20">
+    <div class="parallax-container flex flex-row space-x- 10 mb-20">
         <div class="horiz-gallery-wrapper">
-            <div class="horiz-gallery-strip gap-9 pt-20">
+            <div
+                class="horiz-gallery-strip flex flex-wrap gap-3 md:gap-9 pt-20"
+            >
                 {
                     proyects.map((p: any) => (
                         <div
-                            class={`product-card ${p.type === "mobile" ? "w-36" : "w-[26vw]"} hover:scale-105 duration-300 rounded ease-in-out h-[21vw] box-content shrink-0 group`}
+                            class={`product-card ${p.type === "mobile" ? "w-36 h-[60vw]" : "w-[46vw] h-[21vw]"} hover:scale-105 duration-300 rounded ease-in-out box-content shrink-0 group`}
                             data-product-title={p.title}
                         >
                             <a
@@ -20,7 +22,7 @@ import { proyects } from "../data/proyects";
                                 class="block group-hover:shadow-2xl h-full rounded"
                             >
                                 <img
-                                    src={p.thumbnail}
+                                    src={p.thumbnail}1
                                     alt={p.title}
                                     class="object-cover object-center rounded inset-0 h-full w-full"
                                 />
@@ -43,10 +45,15 @@ import { proyects } from "../data/proyects";
         will-change: transform;
     }
 
+    .gsap-hidden {
+        /*opacity: 0;
+        visibility: hidden;*/
+    }
+
     .horiz-gallery-strip,
     .horiz-gallery-wrapper {
-        display: flex;
-        flex-wrap: wrap;
+        /*display: flex;
+        flex-wrap: wrap;*/
         will-change: transform;
         position: relative;
         justify-content: center;
@@ -75,8 +82,8 @@ import { proyects } from "../data/proyects";
             gsap.set(container, {
                 rotateX: 30,
                 rotateZ: 20,
-                y: -550,
-                opacity: 0.1,
+                y: window.innerHeight - 1350,
+                autoAlpha: 0.1,
             });
             gsap.to(container, {
                 scrollTrigger: {
@@ -91,7 +98,7 @@ import { proyects } from "../data/proyects";
                 rotateX: 0,
                 rotateZ: 0,
                 y: 270,
-                opacity: 1,
+                autoAlpha: 0.1,
                 ease: "none",
             });
         });
@@ -103,12 +110,14 @@ import { proyects } from "../data/proyects";
         horizontalSections.forEach(function (sec: any, i: number) {
             const pinWrap = sec.querySelector(".horiz-gallery-strip");
             let pinWrapWidth: any;
+            // gsap.set(pinWrap, { autoAlpha: 0.1,  });
 
             function refresh() {
                 pinWrapWidth = pinWrap.scrollWidth;
             }
             refresh();
             // Pinning and horizontal scrolling
+            // O si usas autoAlpha: gsap.set(pinWrap, { autoAlpha: 1 });
             gsap.to(pinWrap, {
                 scrollTrigger: {
                     scrub: true,
@@ -120,7 +129,7 @@ import { proyects } from "../data/proyects";
                     // markers: true,
                 },
                 x: 800,
-                opacity: -0.5,
+                autoAlpha: -0.5,
                 ease: "none",
             });
             ScrollTrigger.addEventListener("refreshInit", refresh);
