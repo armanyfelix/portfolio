@@ -8,7 +8,7 @@ import Menu from "./Menu.astro";
 // import Button from "../buttons/Button.astro";
 // import { t } from "@/lib/utils";
 
-const currentPath = Astro.url.pathname;
+// const currentPath = Astro.url.pathname;
 
 let menuOpen = false;
 ---
@@ -143,27 +143,6 @@ let menuOpen = false;
                             </div>
                         </div>
                     </div>
-
-                    <!-- <nav class="hidden gap-1 md:flex lg:gap-3">
-                {
-                    [{ href: "/", title: "" }].slice(0, -1).map((link) => {
-                        const isActive =
-                            currentPath === link.href ||
-                            (link.href !== "/" &&
-                                currentPath.startsWith(link.href));
-
-                        return (
-                            <a
-                                href={link.href}
-                                class={`nav-link font-boldonse text-light uppercase lg:px-8 lg:py-3 ${isActive ? "decoration-orange underline decoration-2 underline-offset-8" : ""}`}
-                            >
-                                {link.title}
-                            </a>
-                        );
-                    })
-                }
-                <a href={"/"} class="lg:px-8 lg:py-3"> home </a>
-            </nav> -->
                 </div>
                 <Menu />
             </div>
@@ -187,16 +166,16 @@ let menuOpen = false;
             if (scrollTween) scrollTween.kill();
 
             navWrapper.classList.add(
-                "bg-primary/60",
+                "bg-primary/90",
                 "shadow-lg",
-                "backdrop-blur",
+                // "backdrop-blur",
                 "rounded-box",
                 "border",
                 "border-primary-content/50",
             );
 
             gsap.to(navWrapper, {
-                maxWidth: "96rem",
+                maxWidth: "76rem",
                 duration: 0.5,
                 ease: "power2.out",
             });
@@ -220,8 +199,8 @@ let menuOpen = false;
             if (scrollTween) scrollTween.kill();
 
             navWrapper.classList.remove(
-                "bg-primary/60",
-                "backdrop-blur",
+                "bg-primary/90",
+                // "backdrop-blur",
                 "shadow-lg",
                 "rounded-box",
                 "border",
@@ -229,7 +208,7 @@ let menuOpen = false;
             );
 
             gsap.to(navWrapper, {
-                // maxWidth: "100%",
+                maxWidth: "72rem",
                 duration: 0.5,
                 ease: "power2.out",
             });
@@ -245,7 +224,7 @@ let menuOpen = false;
                 scale: 1,
                 duration: 0.5,
                 ease: "power2.out",
-                transformOrigin: "left center",
+                transformOrigin: "right center",
             });
         };
 
@@ -269,7 +248,9 @@ let menuOpen = false;
                 "border",
                 "border-base-content/10",
             );
-            gsap.set(navWrapper, { maxWidth: "96rem" });
+            // gsap.set(navWrapper, {
+            //     maxWidth: "8rem",
+            // });
             gsap.set(navContainer, {
                 paddingTop: "0.025rem",
                 paddingBottom: "0.025rem",
@@ -290,7 +271,6 @@ let menuOpen = false;
     const themeRadios = document.querySelectorAll(
         'input[name="theme-buttons"]',
     );
-
     const setTheme = (theme: string) => {
         document.documentElement.setAttribute("data-theme", theme);
         if (themeEmoji) {
@@ -298,7 +278,6 @@ let menuOpen = false;
                 themes.find((t) => t.name === theme)?.emoji || "";
         }
     };
-
     if (themeEmoji) {
         if (!currentTheme) {
             if (window.matchMedia("(prefers-color-scheme: dark)")?.matches) {
@@ -310,14 +289,11 @@ let menuOpen = false;
             setTheme(currentTheme);
         }
     }
-
     function handleThemeChange(event: any) {
         const selectedTheme = event.target.value;
-
         setTheme(selectedTheme);
         localStorage.setItem("theme", selectedTheme);
     }
-
     themeRadios.forEach((radio) => {
         radio.addEventListener("change", handleThemeChange);
     });
