@@ -14,7 +14,7 @@ import { proyects } from "../data/proyects";
                 {
                     proyects.map((p: any) => (
                         <div
-                            class={`product-card ${p.type === "mobile" ? "w-36" : "w-[30vw]"} hover:scale-105 h-[30vh] duration-300 rounded ease-in-out box-content shrink-0 group`}
+                            class={`product-card ${p.type === "mobile" ? "w-14 lg:w-36" : "w-[40vw] lg:max-w-[30vw]"} hover:scale-105 h-[10vh] lg:h-[30vh] duration-300 rounded ease-in-out box-content shrink-0 group`}
                             data-product-title={p.title}
                         >
                             <a
@@ -77,7 +77,7 @@ import { proyects } from "../data/proyects";
             gsap.set(container, {
                 rotateX: 40,
                 rotateZ: 30,
-                y: window.innerHeight - 1200,
+                y: -400,
                 autoAlpha: 0.1,
             });
             gsap.to(container, {
@@ -92,8 +92,8 @@ import { proyects } from "../data/proyects";
                 },
                 rotateX: 0,
                 rotateZ: 0,
-                y: 270,
-                autoAlpha: 0.1,
+                y: 370,
+                autoAlpha: 1,
                 ease: "none",
             });
         });

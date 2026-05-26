@@ -68,20 +68,19 @@ let menuOpen = false;
                             </label>
                         </div>
                         <div class="navbar-center">
-                            <a
-                                href="/"
+                            <div
                                 id="nav-logo"
                                 class="text-primary-content font-boldonse transform origin-center text-l font-bold flex items-center tracking-wide uppercase md:text-3xl lg:text-4xl xl:text-4xl"
                                 style="will-change: transform;"
                             >
                                 Armany felix
-                            </a>
+                            </div>
                         </div>
                         <div class="navbar-end">
-                            <div class="dropdowndropdown-end">
+                            <div>
                                 <button
                                     type="button"
-                                    popovertarget="popover-1"
+                                    popovertarget="popover-themes"
                                     style="anchor-name:--anchor-1"
                                     class="btn btn-lg btn-ghost btn-square text-xl align-middle inine-block"
                                 >
@@ -104,9 +103,9 @@ let menuOpen = false;
                                 </button>
                                 <ul
                                     popover
-                                    id="popover-1"
-                                    style="position-anchor:--anchor-1"
-                                    class="menu dropdown dropdown-end bg-base-300 h-[70dvh] max-h-[70dvh] overflow-scroll flex-nowrap rounded-box w-70 px-3 shadow-2xl"
+                                    id="popover-themes"
+                                    style="position-anchor:--anchor-1; overscroll-behavior: contain;"
+                                    class="menu dropdown dropdown-end bg-base-300 max-h-[70vh] overflow-y-auto flex-nowrap rounded-box w-70 px-3 shadow-2xl"
                                 >
                                     {
                                         themes.map((t: Theme) => (

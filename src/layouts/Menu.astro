@@ -6,12 +6,13 @@ import { type Route, routes } from "@/data/routes";
     <label for="menu-drawer" aria-label="close sidebar" class="drawer-overlay"
     ></label>
     <ul
-        class="menu md:menu-lg lg:menu-xl bg-base-100/60 border-base-content/10 border backdrop-blur-lg  rounded-box m-2 min-h-[98dvh] shadow-2xl w-52 md:w-60 lg:w-80 p-4"
+        class="menu md:menu-lg lg:menu-xl bg-base-100/60 border-base-content/10 border backdrop-blur-lg rounded-box m-2 min-h-[98dvh] shadow-2xl w-52 md:w-60 lg:w-80 p-4"
     >
         {
             routes.map((l: Route) =>
                 l.href ? ( 
                     <li>
+        
                         <a href={l.href}>{l.name}</a>
                     </li>
                 ) : (

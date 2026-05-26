@@ -88,6 +88,10 @@ body {
 	}
 }*/
 
+.smooth-content {
+	padding-bottom: 40px;
+}
+
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;
