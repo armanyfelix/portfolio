@@ -4,31 +4,34 @@ import { proyects } from "../data/proyects";
 
 <section
     id="proyects"
-    class="antialiased flex flex-col pb-96 perspective-midrange transform-3d"
+    class="hero-parallax-section antialiased perspective-midrange transform-3d"
 >
-    <div class="parallax-container flex flex-row space-x- 10 mb-20">
+    <div class="parallax-container">
         <div class="horiz-gallery-wrapper">
-            <div
-                class="horiz-gallery-strip flex flex-wrap gap-3 md:gap-9 pt-20"
-            >
+            <div class="horiz-gallery-strip">
                 {
-                    proyects.map((p: any) => (
+                    proyects.map((p) => (
                         <div
-                            class={`product-card ${p.type === "mobile" ? "w-14 lg:w-36" : "w-[40vw] lg:max-w-[30vw]"} hover:scale-105 h-[10vh] lg:h-[30vh] duration-300 rounded ease-in-out box-content shrink-0 group`}
+                            class:list={[
+                                "product-card group",
+                                p.type === "mobile"
+                                    ? "product-card--mobile"
+                                    : "product-card--desktop",
+                            ]}
                             data-product-title={p.title}
                         >
                             <a
                                 href={p.link}
-                                class="block group-hover:shadow-2xl h-full rounded"
+                                class="project-link"
                             >
                                 <img
-                                    src={p.thumbnail}1
+                                    src={p.thumbnail}
                                     alt={p.title}
-                                    class="object-cover object-center rounded inset-0 h-full w-full"
+                                    class="project-image"
                                 />
                             </a>
-                            <div class="absolute inset-0 h-full w-full opacity-0 rounded group-hover:opacity-80 bg-black pointer-events-none" />
-                            <h2 class="absolute bottom-4 left-4 opacity-0 rounded group-hover:opacity-100 text-white">
+                            <div class="project-overlay" />
+                            <h2 class="project-title">
                                 {p.title}
                             </h2>
                         </div>
@@ -39,19 +42,126 @@ import { proyects } from "../data/proyects";
     </div>
 </section>
 
-<style is:global>
-    .product-card {
-        transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
+<style>
+    .hero-parallax-section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: clamp(12rem, 30vw, 24rem);
+    }
+
+    .parallax-container {
+        display: flex;
+        margin-bottom: clamp(3rem, 8vw, 5rem);
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+    }
+
+    .horiz-gallery-wrapper {
+        display: flex;
+        position: relative;
+        width: 100%;
         will-change: transform;
     }
 
-    .horiz-gallery-strip,
-    .horiz-gallery-wrapper {
+    .horiz-gallery-strip {
         display: flex;
         flex-wrap: wrap;
-        will-change: transform;
-        position: relative;
+        align-items: center;
         justify-content: center;
+        gap: clamp(0.75rem, 2.5vw, 2.25rem);
+        width: 100%;
+        padding: clamp(2.5rem, 7vw, 5rem) clamp(0.75rem, 3vw, 3rem) 0;
+        position: relative;
+        will-change: transform, opacity;
+    }
+
+    .product-card {
+        position: relative;
+        flex: 0 0 auto;
+        height: clamp(6rem, min(22vw, 30vh), 19rem);
+        overflow: hidden;
+        border-radius: clamp(0.5rem, 1vw, 0.9rem);
+        transition: transform 300ms ease, box-shadow 300ms ease;
+        will-change: transform;
+    }
+
+    .product-card--desktop {
+        width: clamp(11rem, min(40vw, 55vh), 34rem);
+    }
+
+    .product-card--mobile {
+        width: clamp(4.5rem, min(15vw, 22vh), 9rem);
+    }
+
+    .product-card:hover {
+        z-index: 2;
+        transform: scale(1.05);
+        box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 25%);
+    }
+
+    .project-link,
+    .project-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    .project-image {
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .project-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 300ms ease;
+    }
+
+    .project-title {
+        position: absolute;
+        bottom: clamp(0.5rem, 1.5vw, 1rem);
+        left: clamp(0.5rem, 1.5vw, 1rem);
+        margin: 0;
+        color: white;
+        font-size: clamp(0.65rem, 1.4vw, 1.25rem);
+        line-height: 1.15;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 300ms ease;
+    }
+
+    .product-card:hover .project-overlay {
+        opacity: 0.8;
+    }
+
+    .product-card:hover .project-title {
+        opacity: 1;
+    }
+
+    @media (min-width: 64rem) {
+        .product-card--desktop {
+            width: clamp(20rem, 30vw, 34rem);
+        }
+    }
+
+    @media (max-width: 30rem) {
+        .horiz-gallery-strip {
+            gap: 0.6rem;
+        }
+
+        .product-card--desktop {
+            width: clamp(9.5rem, 42vw, 12rem);
+        }
+
+        .product-card--mobile {
+            width: clamp(4rem, 14vw, 5.5rem);
+        }
     }
 </style>
 
@@ -61,73 +171,138 @@ import { proyects } from "../data/proyects";
     import ScrollSmoother from "gsap/ScrollSmoother";
 
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-    ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: 2,
-        normalizeScroll: true,
-        // ignoreMobileResize: true,
-    });
-    if (document.getElementById("proyects")) {
-        window.addEventListener("load", () => {
-            const section = document.getElementById("proyects");
-            if (!section) return;
-            const container = document.querySelector(".parallax-container");
-            // --- Valores iniciales (progreso 0) ---
-            gsap.set(container, {
-                rotateX: 40,
-                rotateZ: 30,
-                y: -400,
-                autoAlpha: 0.1,
-            });
-            gsap.to(container, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top center",
-                    end: "top top",
-                    scrub: true,
-                    // pin: true,
-                    // anticipatePin: 1,
-                    // markers: true,
-                },
-                rotateX: 0,
-                rotateZ: 0,
-                y: 370,
-                autoAlpha: 1,
-                ease: "none",
-            });
-        });
 
-        //Horizontal Scroll Galleries
-        const horizontalSections: any = gsap.utils.toArray(
+    let animationContext: gsap.Context | undefined;
+
+    const clamp = (minimum: number, value: number, maximum: number) =>
+        Math.min(maximum, Math.max(minimum, value));
+
+    function destroyHeroParallax() {
+        animationContext?.revert();
+        animationContext = undefined;
+    }
+
+    function initHeroParallax() {
+        destroyHeroParallax();
+
+        const section = document.getElementById("proyects");
+        const container = section?.querySelector<HTMLElement>(
+            ".parallax-container",
+        );
+        const gallery = section?.querySelector<HTMLElement>(
             ".horiz-gallery-wrapper",
         );
-        horizontalSections.forEach(function (sec: any, i: number) {
-            const pinWrap = sec.querySelector(".horiz-gallery-strip");
-            let pinWrapWidth: any;
-            // gsap.set(pinWrap, { autoAlpha: 0.1,  });
+        const strip = gallery?.querySelector<HTMLElement>(
+            ".horiz-gallery-strip",
+        );
 
-            function refresh() {
-                pinWrapWidth = pinWrap.scrollWidth;
-            }
-            refresh();
-            // Pinning and horizontal scrolling
-            // O si usas autoAlpha: gsap.set(pinWrap, { autoAlpha: 1 });
-            gsap.to(pinWrap, {
-                scrollTrigger: {
-                    scrub: true,
-                    trigger: sec,
-                    pin: sec,
-                    start: `top top-=${window.innerHeight * 0.25}`,
-                    end: () => `+=${pinWrapWidth + 100}`,
-                    invalidateOnRefresh: true,
-                    // markers: true,
-                },
-                x: 800,
-                autoAlpha: -0.5,
-                ease: "none",
+        if (!section || !container || !gallery || !strip) return;
+
+        if (!ScrollSmoother.get()) {
+            ScrollSmoother.create({
+                wrapper: "#smooth-wrapper",
+                content: "#smooth-content",
+                smooth: 2,
+                normalizeScroll: true,
             });
-            ScrollTrigger.addEventListener("refreshInit", refresh);
+        }
+
+        const entryY = () =>
+            -clamp(240, window.innerHeight * 0.56, 560);
+        const settledY = () => {
+            const viewportCenter = (window.innerHeight - container.offsetHeight) / 2;
+            const headerClearance = clamp(24, window.innerHeight * 0.05, 64);
+
+            return Math.max(headerClearance, viewportCenter);
+        };
+        const exitX = () => clamp(240, window.innerWidth * 0.82, 800);
+        const holdDistance = () =>
+            clamp(180, window.innerHeight * 0.32, 360);
+        const slideDistance = () =>
+            strip.scrollWidth + clamp(60, window.innerWidth * 0.08, 100);
+
+        animationContext = gsap.context(() => {
+            // Mantiene la entrada original: torcida, elevada y casi transparente.
+            gsap.fromTo(
+                container,
+                {
+                    rotateX: 40,
+                    rotateZ: 30,
+                    y: entryY,
+                    autoAlpha: 0.1,
+                },
+                {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top center",
+                        end: "top top",
+                        scrub: true,
+                        invalidateOnRefresh: true,
+                    },
+                    rotateX: 0,
+                    rotateZ: 0,
+                    y: settledY,
+                    autoAlpha: 1,
+                    ease: "none",
+                },
+            );
+
+            // Al llegar al centro, conserva el encuadre antes de iniciar la salida.
+            const hold = holdDistance();
+            const slide = slideDistance();
+            const exitTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    pin: section,
+                    pinSpacing: false,
+                    start: "top top",
+                    end: () => `+=${holdDistance() + slideDistance()}`,
+                    scrub: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            exitTimeline
+                .to(strip, {
+                    x: 0,
+                    autoAlpha: 1,
+                    duration: hold,
+                    ease: "none",
+                })
+                .to(strip, {
+                    x: exitX,
+                    autoAlpha: -0.5,
+                    duration: slide,
+                    ease: "none",
+                });
+
+            for (const image of strip.querySelectorAll("img")) {
+                if (!image.complete) {
+                    image.addEventListener(
+                        "load",
+                        () => ScrollTrigger.refresh(),
+                        { once: true },
+                    );
+                }
+            }
+        }, section);
+
+        ScrollTrigger.refresh();
+    }
+
+    const onPageLoad = () => initHeroParallax();
+    const onBeforeSwap = () => destroyHeroParallax();
+
+    document.addEventListener("astro:page-load", onPageLoad);
+    document.addEventListener("astro:before-swap", onBeforeSwap);
+    initHeroParallax();
+
+    if (import.meta.hot) {
+        import.meta.hot.dispose(() => {
+            document.removeEventListener("astro:page-load", onPageLoad);
+            document.removeEventListener("astro:before-swap", onBeforeSwap);
+            destroyHeroParallax();
         });
     }
 </script>
