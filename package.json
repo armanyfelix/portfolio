@@ -12,30 +12,30 @@
 		"generate-types": "wrangler types"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.9.9",
-		"@astrojs/cloudflare": "^13.5.3",
-		"@astrojs/node": "^10.1.1",
-		"@astrojs/react": "^5.0.5",
-		"@astrojs/sitemap": "^3.7.2",
-		"@tailwindcss/vite": "^4.3.0",
-		"@types/react": "^19.2.15",
-		"@types/react-dom": "^19.2.3",
-		"astro": "^6.3.6",
+		"@astrojs/check": "^0.9.10",
+		"@astrojs/cloudflare": "^14.2.1",
+		"@astrojs/node": "^11.1.2",
+		"@astrojs/react": "^6.0.2",
+		"@astrojs/sitemap": "^3.7.3",
+		"@tailwindcss/vite": "^4.3.3",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
+		"astro": "^7.2.2",
 		"clsx": "^2.1.1",
-		"daisyui": "^5.5.20",
+		"daisyui": "^5.7.17",
 		"dotenv": "^17.4.2",
 		"gsap": "^3.15.0",
-		"react": "^19.2.6",
-		"react-dom": "^19.2.6",
+		"react": "^19.2.8",
+		"react-dom": "^19.2.8",
 		"tailwind-merge": "^3.6.0",
-		"tailwindcss": "^4.3.0",
-		"typescript": "^6.0.3"
+		"tailwindcss": "^4.3.3",
+		"typescript": "^7.0.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.15",
-		"@tailwindcss/typography": "^0.5.19",
+		"@biomejs/biome": "2.5.8",
+		"@tailwindcss/typography": "^0.5.20",
 		"husky": "^9.1.7",
-		"wrangler": "^4.93.0"
+		"wrangler": "^4.123.0"
 	},
 	"engines": {
 		"node": ">=22 <25"

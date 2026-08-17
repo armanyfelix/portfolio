@@ -7,29 +7,34 @@ import { defineConfig, envField } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-	output: "server",
-	site: "https://armanyfelix.dev",
-	integrations: [sitemap(), react()],
-	vite: {
-		plugins: [tailwind()],
-		ssr: {
-			noExternal: ["gsap"],
-		},
-	},
-	adapter: cloudflare({
-		// platformProxy: {
-		// 	enabled: true, // IMPORTANTE: Esto permite ver logs en dev
-		// },
-		imageService: "compile",
-	}),
-	env: {
-		schema: {
-			EMAIL_SENDER: envField.string({ context: "server", access: "secret" }),
-			EMAIL_RECEIVER: envField.string({ context: "server", access: "secret" }),
-			BREVO_API_KEY: envField.string({
-				context: "server",
-				access: "secret",
-			}),
-		},
-	},
+  output: "server",
+  site: "https://armanyfelix.dev",
+  integrations: [sitemap(), react()],
+  vite: {
+    plugins: [tailwind()],
+    server: {
+      watch: {
+        ignored: ["**/.wrangler/**"],
+      },
+    },
+    ssr: {
+      noExternal: ["gsap"],
+    },
+  },
+  adapter: cloudflare({
+    // platformProxy: {
+    // 	enabled: true, // IMPORTANTE: Esto permite ver logs en dev
+    // },
+    imageService: "compile",
+  }),
+  env: {
+    schema: {
+      EMAIL_SENDER: envField.string({ context: "server", access: "secret" }),
+      EMAIL_RECEIVER: envField.string({ context: "server", access: "secret" }),
+      BREVO_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
+  },
 });
